@@ -14,5 +14,6 @@ export const Title = styled.Text`
     color: ${theme.colors.white};
     font-family: ${theme.fonts.bold};
     font-size: ${theme.fontSizes.sm}px;
+    line-height: ${theme.lineHeight.default}px;
   `}
 `

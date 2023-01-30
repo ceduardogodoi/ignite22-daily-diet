@@ -28,6 +28,6 @@ export const theme = {
     xxl: '32',
   },
   lineHeight: {
-    default: '130%',
+    default: '18.2',
   }
 } as const
