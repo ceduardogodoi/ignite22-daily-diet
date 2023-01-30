@@ -15,7 +15,7 @@ export function Button(props: Props) {
 
   return (
     <Container variant={variant} {...rest}>
-      {icon && <Icon icon={icon} variant={variant} />}
+      {icon && <Icon icon={icon} size={18} variant={variant} />}
 
       <Title variant={variant}>{title}</Title>
     </Container>
