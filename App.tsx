@@ -3,6 +3,7 @@ import styled from 'styled-components/native'
 import { Nunito_400Regular, Nunito_700Bold, useFonts } from '@expo-google-fonts/nunito'
 
 import { Button } from '@components/Button'
+import { Select } from '@components/Select'
 
 import { theme } from '@theme'
 
@@ -15,7 +16,7 @@ export default function App() {
   return fontsLoaded && (
     <ThemeProvider theme={theme}>
       <View>
-        <Button title="Label" icon="trash" />
+        <Select title="Select" type="no" />
       </View>
     </ThemeProvider>
   )
