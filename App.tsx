@@ -15,7 +15,7 @@ export default function App() {
   return fontsLoaded && (
     <ThemeProvider theme={theme}>
       <View>
-        <Button title="Click me" />
+        <Button title="Label" icon="pencil" />
       </View>
     </ThemeProvider>
   )
