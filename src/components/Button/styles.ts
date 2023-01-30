@@ -1,3 +1,4 @@
+import { Pressable, PressableProps } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
 import { Icon as IconComponent } from './components/Icon'
@@ -8,16 +9,18 @@ export type Variant = 'solid' | 'outline'
 
 type Variants = Record<Variant, { [key: string]: string }>
 
-const variants: Variants = {
+export const variants: Variants = {
   solid: {
-    'background-color': theme.colors['gray-200'],
+    backgroundColor: theme.colors['gray-200'],
     color: theme.colors.white,
-    'border-color': theme.colors['gray-200'],
+    borderColor: theme.colors['gray-200'],
+    pressedBackround: theme.colors['gray-100'],
   },
   outline: {
-    'background-color': theme.colors.white,
+    backgroundColor: theme.colors.white,
     color: theme.colors['gray-100'],
-    'border-color': theme.colors['gray-100'],
+    borderColor: theme.colors['gray-100'],
+    pressedBackround: theme.colors['gray-500'],
   },
 }
 
@@ -25,7 +28,7 @@ type Props = {
   variant: Variant
 }
 
-export const Container = styled.TouchableOpacity<Props>`
+export const Container = styled.Pressable<Props>`
   border-radius: 6px;
   padding: 16px 24px;
   flex-direction: row;
@@ -33,8 +36,8 @@ export const Container = styled.TouchableOpacity<Props>`
   justify-content: center;
 
   ${({ variant }) => css`
-    background-color: ${variants[variant]['background-color']};
-    border-color: ${variants[variant]['border-color']};
+    background-color: ${variants[variant].backgroundColor};
+    border-color: ${variants[variant].borderColor};
     border-style: solid;
     border-width: 1px;
   `}
