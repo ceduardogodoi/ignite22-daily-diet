@@ -7,10 +7,13 @@ import {
   IconProps as PhosphorIconProps,
 } from 'phosphor-react-native'
 
+import { Variant } from '../styles'
+
 export type IconNames = 'arrowLeft' | 'arrowUpRight' | 'pencil' | 'plus' | 'trash'
 
 type IconProps = PhosphorIconProps & {
   icon?: IconNames
+  variant?: Variant
 }
 
 export function Icon({ icon, ...rest }: IconProps) {

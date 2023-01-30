@@ -2,19 +2,22 @@ import { TouchableOpacityProps } from 'react-native'
 
 import { IconNames } from './components/Icon'
 
-import { Container, Icon, Title } from './styles'
+import { Container, Icon, Title, Variant } from './styles'
 
 type Props = TouchableOpacityProps & {
-  title: string
   icon?: IconNames
+  title: string
+  variant?: Variant
 }
 
-export function Button({ title, icon, ...rest }: Props) {
-  return (
-    <Container {...rest}>
-      {icon && <Icon icon={icon} />}
+export function Button(props: Props) {
+  const { title, icon, variant = 'solid', ...rest } = props
 
-      <Title>{title}</Title>
+  return (
+    <Container variant={variant} {...rest}>
+      {icon && <Icon icon={icon} variant={variant} />}
+
+      <Title variant={variant}>{title}</Title>
     </Container>
   )
 }
