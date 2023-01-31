@@ -1,6 +1,36 @@
 import styled, { css } from 'styled-components/native'
 
-export const Container = styled.TouchableOpacity`
+import { theme } from '@theme'
+
+export type YesNo = 'yes' | 'no'
+
+type DotProps = {
+  type: YesNo
+}
+
+type ContainerProps = {
+  isSelected?: boolean
+}
+
+type Variants = {
+  [key in YesNo]: {
+    backgroundColor: string,
+    borderColor: string,
+  }
+}
+
+const variants: Variants = {
+  yes: {
+    backgroundColor: theme.colors['green-light'],
+    borderColor: theme.colors['green-dark'],
+  },
+  no: {
+    backgroundColor: theme.colors['red-light'],
+    borderColor: theme.colors['red-dark'],
+  },
+} as const
+
+export const Container = styled.View<ContainerProps & DotProps>`
   align-items: center;
   border-width: 1px;
   border-style: solid;
@@ -9,17 +39,11 @@ export const Container = styled.TouchableOpacity`
   justify-content: center;
   padding: 16px;
 
-  ${({ theme }) => css`
-    background-color: ${theme.colors['gray-600']};
-    border-color: ${theme.colors['gray-600']};
+  ${({ theme, isSelected, type }) => css`
+    background-color: ${isSelected ? variants[type].backgroundColor : theme.colors['gray-600']};
+    border-color: ${isSelected ? variants[type].borderColor : theme.colors['gray-600']};
   `}
 `
-
-export type YesNo = 'yes' | 'no'
-
-type DotProps = {
-  type: YesNo
-}
 
 export const Dot = styled.View<DotProps>`
   border-radius: 9999px;
@@ -37,6 +61,6 @@ export const Title = styled.Text`
     color: ${theme.colors['gray-100']};
     font-family: ${theme.fonts.bold};
     font-size: ${theme.fontSizes.sm}px;
-    line-height: ${theme.lineHeight};
+    line-height: ${theme.lineHeight.default}px;
   `}
 `

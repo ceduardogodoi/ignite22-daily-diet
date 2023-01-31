@@ -16,7 +16,7 @@ export default function App() {
   return fontsLoaded && (
     <ThemeProvider theme={theme}>
       <View>
-        <Select title="Select" type="no" />
+        <Select title="Select" type="yes" />
       </View>
     </ThemeProvider>
   )
