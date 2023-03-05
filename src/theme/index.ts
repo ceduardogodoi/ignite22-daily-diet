@@ -27,7 +27,7 @@ export const theme = {
     xl: '24',
     xxl: '32',
   },
-  lineHeight: {
-    default: 18,
-  }
+  borderRadius: {
+    default: 6,
+  },
 } as const
