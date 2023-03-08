@@ -3,13 +3,14 @@ import styled, { css } from 'styled-components/native'
 
 export const LayoutContainer = styled(SafeAreaView)`
   flex: 1;
+  padding: 32px 24px;
+
   ${({ theme }) => css`
     background-color: ${theme.colors['gray-700']};
   `};
 `
 
 export const HeaderContainer = styled.View`
-  padding: 32px 24px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

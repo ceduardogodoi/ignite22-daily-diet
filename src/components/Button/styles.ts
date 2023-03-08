@@ -1,4 +1,3 @@
-import { Pressable, PressableProps } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
 import { Icon as IconComponent } from './components/Icon'
@@ -32,8 +31,8 @@ export const Container = styled.Pressable<Props>`
   border-radius: 6px;
   padding: 16px 24px;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   ${({ variant }) => css`
     background-color: ${variants[variant].backgroundColor};
@@ -48,7 +47,7 @@ export const Title = styled.Text<Props>`
     color: ${variants[variant].color};
     font-family: ${theme.fonts.bold};
     font-size: ${theme.fontSizes.sm}px;
-    line-height: ${theme.lineHeight.default}px;
+    line-height: 18px;
   `}
 `
 
