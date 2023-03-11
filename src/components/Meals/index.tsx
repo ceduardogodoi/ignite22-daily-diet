@@ -1,6 +1,28 @@
-import { Button } from '@components/Button'
+import { FlatList, View } from 'react-native';
 
-import { Container, Day, DayAndMeals, Header, Title } from './styles'
+import { Button } from '@components/Button'
+import { MealItem } from './components/MealItem';
+
+import { Container, Day, Header, Title } from './styles'
+
+type Meal = {
+  time: string
+  meal: string
+  status: 'bad' | 'good'
+}
+
+const meals: Meal[] = [
+  {
+    time: '20:00',
+    meal: 'X-tudo',
+    status: 'bad',
+  },
+  {
+    time: '11:00',
+    meal: 'Arroz e frango',
+    status: 'good',
+  },
+]
 
 export function Meals() {
   function handleAddMeal() {
@@ -20,10 +42,17 @@ export function Meals() {
         />
       </Header>
 
-      <DayAndMeals>
+      <View>
         <Day>12.08.22</Day>
-        <Day>---</Day>
-      </DayAndMeals>
+
+      <FlatList
+        data={meals}
+        keyExtractor={(_, index) => String(index)}
+        renderItem={({ item }) => {
+          return <MealItem {...item} />
+        }}
+      />
+      </View>
     </Container>
   )
 }

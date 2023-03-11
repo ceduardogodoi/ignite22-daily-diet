@@ -19,8 +19,6 @@ export const Title = styled.Text`
   `};
 `
 
-export const DayAndMeals = styled.View``
-
 export const Day = styled.Text`
   margin-bottom: 8px;
 
