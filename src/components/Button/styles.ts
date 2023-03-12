@@ -28,12 +28,12 @@ type Props = {
 }
 
 export const Container = styled.Pressable<Props>`
-  border-radius: 6px;
   padding: 16px 24px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
+  border-radius: 6px;
+  
   ${({ variant }) => css`
     background-color: ${variants[variant].backgroundColor};
     border-color: ${variants[variant].borderColor};

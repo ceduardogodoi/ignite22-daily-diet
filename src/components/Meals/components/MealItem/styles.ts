@@ -4,10 +4,10 @@ import { theme } from '@theme'
 
 export const Container = styled.View`
   padding: 14px 16px 14px 12px;
-  border-radius: 6px;
   flex-direction: row;
   align-items: center;
   margin-bottom: 12px;
+  border-radius: 6px;
 
   ${({ theme }) => css`
     border: 1px solid ${theme.colors['gray-500']};
@@ -62,8 +62,8 @@ type StatusType = {
 export const Status = styled.View<StatusType>`
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-
+  border-radius: 9999px;
+  
   ${({ status }) => css`
     background-color: ${statusColor[status]};
   `};

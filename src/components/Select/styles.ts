@@ -34,10 +34,10 @@ export const Container = styled.View<ContainerProps & DotProps>`
   align-items: center;
   border-width: 1px;
   border-style: solid;
-  border-radius: 6px;
   flex-direction: row;
   justify-content: center;
   padding: 16px;
+  border-radius: 6px;
 
   ${({ theme, isSelected, type }) => css`
     background-color: ${isSelected ? variants[type].backgroundColor : theme.colors['gray-600']};
@@ -46,10 +46,10 @@ export const Container = styled.View<ContainerProps & DotProps>`
 `
 
 export const Dot = styled.View<DotProps>`
-  border-radius: 9999px;
   height: 8px;
   margin-right: 8px;
   width: 8px;
+  border-radius: 6px;
 
   ${({ theme, type }) => css`
     background-color: ${type === 'yes' ? theme.colors['green-dark'] : theme.colors['red-dark']};

@@ -6,8 +6,8 @@ export const Container = styled.View`
   width: 100%;
   margin: 32px auto 0;
   padding: 20px 16px;
-  border-radius: 8px;
-
+  border-radius: 6px;
+  
   ${({ theme }) => css`
     background-color: ${theme.colors['green-light']};
   `};

@@ -16,10 +16,11 @@ export const Label = styled.Text`
 `;
 
 export const CustomTextInput = styled.TextInput`
+  border-radius: 6px;
+
   ${({ theme }) => css`
     padding: 14px;
     border: 1px solid ${theme.colors['gray-500']};
-    border-radius: ${theme.borderRadius.default}px;
     font-size: ${theme.fontSizes.md}px;
     line-height: 21px;
     color: ${theme.colors['gray-100']};
