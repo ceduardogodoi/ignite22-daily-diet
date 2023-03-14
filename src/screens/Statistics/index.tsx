@@ -1,33 +1,41 @@
 import { Image, StatusBar } from 'react-native';
 import { useTheme } from 'styled-components/native';
 
-import { HeaderContainer, HeaderDescription, Percentage, Heading, LayoutContainer, MainContent, HeaderButton } from './styles';
+import {
+  Header,
+  Description,
+  Percentage,
+  Heading,
+  Container,
+  MainContent,
+  BackButton,
+} from './styles';
 
 import leftArrow from '@assets/left-arrow.png'
 
-export function DetailLayout() {
+export function Statistics() {
   const theme = useTheme()
 
   return (
-    <LayoutContainer>
+    <Container>
       <StatusBar backgroundColor={theme.colors['green-light']} barStyle="dark-content" />
 
-      <HeaderContainer>
-        <HeaderButton>
+      <Header>
+        <BackButton>
           <Image source={leftArrow} />
-        </HeaderButton>
+        </BackButton>
 
         <Percentage>
           90,86%
         </Percentage>
-        <HeaderDescription>
+        <Description>
           das refeições dentro da dieta
-        </HeaderDescription>
-      </HeaderContainer>
+        </Description>
+      </Header>
 
       <MainContent>
         <Heading>Estatísticas gerais</Heading>
       </MainContent>
-    </LayoutContainer>
+    </Container>
   )
 }

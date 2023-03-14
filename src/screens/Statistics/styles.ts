@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
 
-export const LayoutContainer = styled(SafeAreaView)`
+export const Container = styled(SafeAreaView)`
   flex: 1;
 
   ${({ theme }) => css`
@@ -9,7 +9,7 @@ export const LayoutContainer = styled(SafeAreaView)`
   `};
 `
 
-export const HeaderContainer = styled.View`
+export const Header = styled.View`
   padding: 34px 24px;
 
   ${({ theme }) => css`
@@ -17,7 +17,7 @@ export const HeaderContainer = styled.View`
   `};
 `
 
-export const HeaderButton = styled.TouchableOpacity``
+export const BackButton = styled.TouchableOpacity``
 
 export const Percentage = styled.Text`
   line-height: 42px;
@@ -30,7 +30,7 @@ export const Percentage = styled.Text`
   `};
 `
 
-export const HeaderDescription = styled.Text`
+export const Description = styled.Text`
   line-height: 18px;
   text-align: center;
 
