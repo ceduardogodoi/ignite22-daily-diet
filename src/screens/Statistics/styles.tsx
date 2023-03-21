@@ -18,7 +18,7 @@ type ContainerProps = {
   status?: BoxStatus
 }
 
-export const Container = styled(SafeAreaView) <ContainerProps>`
+export const Container = styled(SafeAreaView)<ContainerProps>`
   flex: 1;
 
   ${({ status = 'neutral' }) => css`
@@ -33,8 +33,6 @@ export const Header = styled.View<ContainerProps>`
     background-color: ${boxStatus[status]};
   `};
 `
-
-export const BackButton = styled.TouchableOpacity``
 
 export const Percentage = styled.Text`
   line-height: 42px;
@@ -60,7 +58,8 @@ export const Description = styled.Text`
 
 export const MainContent = styled.View`
   flex: 1;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   padding: 34px 24px 0;
 
   ${({ theme }) => css`
