@@ -122,7 +122,7 @@ const arrowStatus = {
   neutral: 'gray',
   success: 'green',
   fail: 'red',
-} as const;
+} as const
 
 type LeftArrowButtonProps = SvgProps & {
   status?: keyof typeof arrowStatus
@@ -134,4 +134,4 @@ export function LeftArrowButton({ status = 'neutral', ...rest }: LeftArrowButton
 
 export const StatusBar = styled.StatusBar.attrs<ContainerProps>(({ status = 'neutral' }) => ({
   backgroundColor: boxStatus[status],
-}))``;
+}))``

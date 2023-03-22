@@ -5,11 +5,11 @@ type FieldProps = TextInputProps & {
   label: string
 }
 
-export function Field({ label }: FieldProps) {
+export function InputField({ label, ...rest }: FieldProps) {
   return (
     <Container>
       <Label>{label}</Label>
-      <Input />
+      <Input {...rest} />
     </Container>
   )
 }

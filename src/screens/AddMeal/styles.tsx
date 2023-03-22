@@ -6,8 +6,12 @@ import { theme } from '@theme';
 
 import LeftArrow from '@assets/left-arrow.svg'
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(SafeAreaView) <ContainerProps>`
   flex: 1;
+
+  ${({ status = 'neutral' }) => css`
+    background-color: ${boxStatus[status]};
+  `};
 `
 
 const boxStatus = {
@@ -67,11 +71,11 @@ const arrowStatus = {
   neutral: 'gray',
   success: 'green',
   fail: 'red',
-} as const;
+} as const
 
 type LeftArrowButtonProps = SvgProps & {
   status?: keyof typeof arrowStatus
-};
+}
 
 export const LeftArrowButtonContainer = styled.TouchableOpacity`
   background-color: transparent;
@@ -81,6 +85,14 @@ export function LeftArrowButton({ status = 'neutral', ...rest }: LeftArrowButton
   return <LeftArrow {...rest} stroke={arrowStatus[status]} />
 }
 
+export const DateTimeContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const OptionsContainer = styled.View`
+`
+
 export const StatusBar = styled.StatusBar.attrs<ContainerProps>(({ status = 'neutral' }) => ({
   backgroundColor: boxStatus[status],
-}))``;
+}))``

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native'
 
 export const Container = styled.View`
-  height: 100px;
+  margin-bottom: 24px;
 `
 
 export const Label = styled.Text`
@@ -24,5 +24,9 @@ export const Input = styled.TextInput`
     font-family: ${theme.fonts.regular};
     font-size: ${theme.fontSizes.md}px;
     color: ${theme.colors['gray-100']};
+  `};
+
+  ${({ multiline }) => multiline && css`
+    height: 120px;
   `};
 `

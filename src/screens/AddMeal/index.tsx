@@ -1,10 +1,13 @@
-import { Field } from '@components/Field'
+import { InputField } from '@components/Field'
+import { Label } from '@components/Typography'
 import {
   Container,
+  DateTimeContainer,
   Header,
   LeftArrowButton,
   LeftArrowButtonContainer,
   MainContent,
+  OptionsContainer,
   StatusBar,
   Title,
   TitleContainer
@@ -26,7 +29,17 @@ export function AddMeal() {
       </Header>
 
       <MainContent>
-        <Field label="Nome" />
+        <InputField label="Nome" />
+        <InputField label="Descrição" multiline />
+
+        <DateTimeContainer>
+          <InputField label="Data" style={{ minWidth: 153 }} />
+          <InputField label="Hora" style={{ minWidth: 153 }} />
+        </DateTimeContainer>
+
+        <OptionsContainer>
+          <Label>Está dentro da dieta?</Label>
+        </OptionsContainer>
       </MainContent>
     </Container>
   )
