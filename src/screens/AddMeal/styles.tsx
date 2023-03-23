@@ -1,19 +1,21 @@
 import {
+  Dimensions,
   StatusBar as NativeStatusBar,
   StatusBarProps as NativeStatusBarProps,
 } from 'react-native'
 import { SvgProps } from 'react-native-svg'
 import styled, { css } from 'styled-components/native'
 
-import { Button } from '@components/Button'
-
 import { theme } from '@theme'
 
 import LeftArrow from '@assets/left-arrow.svg'
 
+const { height } = Dimensions.get('window');
+
 export const Container = styled.View<ContainerProps>`
   flex: 1;
   padding-top: 30px;
+  min-height: ${height};
 
   ${({ status = 'neutral' }) => css`
     background-color: ${boxStatus[status]};
@@ -107,7 +109,7 @@ export const Option = styled.View`
 
 export const CreateMealButtonContainer = styled.View`
   margin-top: auto;
-  margin-bottom: 29px;
+  margin-bottom: 30px;
 `;
 
 type StatusBarProps = NativeStatusBarProps & {
