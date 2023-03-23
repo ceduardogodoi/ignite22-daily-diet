@@ -30,7 +30,7 @@ const variants: Variants = {
   },
 } as const
 
-export const Container = styled.View<ContainerProps & DotProps>`
+export const Container = styled.TouchableOpacity<ContainerProps & DotProps>`
   align-items: center;
   border-width: 1px;
   border-style: solid;

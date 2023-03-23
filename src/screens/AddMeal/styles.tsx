@@ -1,13 +1,19 @@
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { SvgProps } from 'react-native-svg';
+import {
+  StatusBar as NativeStatusBar,
+  StatusBarProps as NativeStatusBarProps,
+} from 'react-native'
+import { SvgProps } from 'react-native-svg'
 import styled, { css } from 'styled-components/native'
 
-import { theme } from '@theme';
+import { Button } from '@components/Button'
+
+import { theme } from '@theme'
 
 import LeftArrow from '@assets/left-arrow.svg'
 
-export const Container = styled(SafeAreaView) <ContainerProps>`
+export const Container = styled.View<ContainerProps>`
   flex: 1;
+  padding-top: 30px;
 
   ${({ status = 'neutral' }) => css`
     background-color: ${boxStatus[status]};
@@ -91,8 +97,25 @@ export const DateTimeContainer = styled.View`
 `
 
 export const OptionsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
 `
 
-export const StatusBar = styled.StatusBar.attrs<ContainerProps>(({ status = 'neutral' }) => ({
-  backgroundColor: boxStatus[status],
-}))``
+export const Option = styled.View`
+  min-width: 160px;
+`
+
+export const CreateMealButtonContainer = styled.View`
+  margin-top: auto;
+  margin-bottom: 29px;
+`;
+
+type StatusBarProps = NativeStatusBarProps & {
+  status?: BoxStatus
+}
+
+export function StatusBar({ status = 'neutral', ...rest }: StatusBarProps) {
+  return (
+    <NativeStatusBar translucent backgroundColor={boxStatus[status]} {...rest} />
+  )
+}

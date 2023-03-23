@@ -1,12 +1,16 @@
+import { Button } from '@components/Button'
 import { InputField } from '@components/Field'
+import { Select } from '@components/Select'
 import { Label } from '@components/Typography'
 import {
   Container,
+  CreateMealButtonContainer,
   DateTimeContainer,
   Header,
   LeftArrowButton,
   LeftArrowButtonContainer,
   MainContent,
+  Option,
   OptionsContainer,
   StatusBar,
   Title,
@@ -33,13 +37,23 @@ export function AddMeal() {
         <InputField label="Descrição" multiline />
 
         <DateTimeContainer>
-          <InputField label="Data" style={{ minWidth: 153 }} />
-          <InputField label="Hora" style={{ minWidth: 153 }} />
+          <InputField label="Data" style={{ minWidth: 160 }} />
+          <InputField label="Hora" style={{ minWidth: 160 }} />
         </DateTimeContainer>
 
+        <Label>Está dentro da dieta?</Label>
         <OptionsContainer>
-          <Label>Está dentro da dieta?</Label>
+          <Option>
+            <Select title="Sim" type="yes" />
+          </Option>
+          <Option>
+            <Select title="Não" type="no" />
+          </Option>
         </OptionsContainer>
+
+        <CreateMealButtonContainer>
+          <Button title="Cadastrar refeição" />
+        </CreateMealButtonContainer>
       </MainContent>
     </Container>
   )

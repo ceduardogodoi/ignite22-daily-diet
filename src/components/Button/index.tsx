@@ -19,9 +19,9 @@ export function Button(props: Props) {
       style={({ pressed }) => [
         {
           backgroundColor: pressed ?
-            variants[variant].pressedBackround :
+            variants[variant].pressedBackground :
             variants[variant].backgroundColor
-        }
+        },
       ]}
       {...rest}
     >

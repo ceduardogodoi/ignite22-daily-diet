@@ -13,13 +13,13 @@ export const variants: Variants = {
     backgroundColor: theme.colors['gray-200'],
     color: theme.colors.white,
     borderColor: theme.colors['gray-200'],
-    pressedBackround: theme.colors['gray-100'],
+    pressedBackground: theme.colors['gray-100'],
   },
   outline: {
     backgroundColor: theme.colors.white,
     color: theme.colors['gray-100'],
     borderColor: theme.colors['gray-100'],
-    pressedBackround: theme.colors['gray-500'],
+    pressedBackground: theme.colors['gray-500'],
   },
 }
 
