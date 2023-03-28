@@ -15,7 +15,7 @@ const { height } = Dimensions.get('window');
 export const Container = styled.View<ContainerProps>`
   flex: 1;
   padding-top: 30px;
-  min-height: ${height};
+  min-height: ${height}px;
 
   ${({ status = 'neutral' }) => css`
     background-color: ${boxStatus[status]};
