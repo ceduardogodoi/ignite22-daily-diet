@@ -1,17 +1,19 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AddMeal } from '@screens/AddMeal'
 import { HomeScreen } from '@screens/Home'
 import { Statistics } from '@screens/Statistics'
 import { Feedback } from '@screens/Feedback'
 
-type RootStackParamList = {
+type AppRoutes = {
   Home: undefined
   Statistics: undefined
   AddMeal: undefined
   Feedback: undefined
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>
+
+const Stack = createNativeStackNavigator<AppRoutes>()
 
 export function Routes() {
   return (
