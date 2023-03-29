@@ -1,7 +1,10 @@
-import { Button } from '@components/Button';
-import { StatusBar } from '@components/StatusBar';
+import { useState } from 'react'
 
-import { BoxStatus } from '@styles/global';
+import { Button } from '@components/Button'
+import { RemoveMealModal } from '@components/RemoveMealModal'
+import { StatusBar } from '@components/StatusBar'
+
+import { BoxStatus } from '@styles/global'
 
 import {
   ActionsContainer,
@@ -24,6 +27,20 @@ type Props = {
 }
 
 export function MealDetail({ status = 'neutral' }: Props) {
+  const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
+
+  function handleOpenRemoveMealModal() {
+    setRemoveMealModalOpen(true);
+  }
+
+  function handleCloseRemoveMealModal() {
+    setRemoveMealModalOpen(false);
+  }
+
+  function handleConfirmRemoveMealModal() {
+    console.log('to implement');
+  }
+
   let tagText: string | undefined
   switch (status) {
     case 'fail': {
@@ -67,10 +84,24 @@ export function MealDetail({ status = 'neutral' }: Props) {
         {tagText && <Tag title={tagText} status={status} disabled />}
 
         <ActionsContainer>
-          <Button title="Editar refeição" icon="pencil" />
-          <Button title="Excluir refeição" icon="trash" variant="outline" />
+          <Button
+            title="Editar refeição"
+            icon="pencil"
+          />
+          <Button
+            title="Excluir refeição"
+            icon="trash"
+            variant="outline"
+            onPress={handleOpenRemoveMealModal}
+          />
         </ActionsContainer>
       </MainContent>
+
+      <RemoveMealModal
+        open={isRemoveMealModalOpen}
+        onClose={handleCloseRemoveMealModal}
+        onConfirm={handleConfirmRemoveMealModal}
+      />
     </Container>
   )
 }
