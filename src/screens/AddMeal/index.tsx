@@ -1,6 +1,7 @@
 import { Button } from '@components/Button'
 import { InputField } from '@components/Field'
 import { Select } from '@components/Select'
+import { StatusBar } from '@components/StatusBar'
 import { Label } from '@components/Typography'
 import {
   Container,
@@ -12,7 +13,6 @@ import {
   MainContent,
   Option,
   OptionsContainer,
-  StatusBar,
   Title,
   TitleContainer
 } from './styles'
@@ -44,10 +44,10 @@ export function AddMeal() {
         <Label>Está dentro da dieta?</Label>
         <OptionsContainer>
           <Option>
-            <Select title="Sim" type="yes" />
+            <Select title="Sim" status="success" />
           </Option>
           <Option>
-            <Select title="Não" type="no" />
+            <Select title="Não" status="fail" />
           </Option>
         </OptionsContainer>
 

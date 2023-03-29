@@ -2,21 +2,9 @@ import { SvgProps } from 'react-native-svg';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
 
-import { theme } from '@theme'
+import { BoxStatus, boxStatus, ContainerProps } from '@styles/global';
 
 import LeftArrow from '@assets/left-arrow.svg'
-
-const boxStatus = {
-  neutral: theme.colors['gray-600'],
-  success: theme.colors['green-light'],
-  fail: theme.colors['red-light'],
-} as const;
-
-export type BoxStatus = keyof typeof boxStatus;
-
-type ContainerProps = {
-  status?: BoxStatus
-}
 
 export const Container = styled(SafeAreaView)<ContainerProps>`
   flex: 1;

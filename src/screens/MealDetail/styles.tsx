@@ -1,10 +1,11 @@
-import { Dimensions } from 'react-native'
-import { SvgProps } from 'react-native-svg'
+import { Dimensions } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 import styled, { css } from 'styled-components/native'
 
 import { boxStatus, ContainerProps } from '@styles/global'
 
 import LeftArrow from '@assets/left-arrow.svg'
+import { Select } from '@components/Select';
 
 const { height } = Dimensions.get('window');
 
@@ -52,11 +53,71 @@ export const MainContent = styled.View`
   flex: 1;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding: 40px 24px 0;
+  padding: 40px 24px 28px;
 
   ${({ theme }) => css`
     background-color: ${theme.colors['gray-700']};
   `};
+`
+
+export const MealName = styled.Text`
+  line-height: 26px;
+  margin-bottom: 8px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.bold};
+    font-size: ${theme.fontSizes.lg}px;
+    color: ${theme.colors['gray-100']};
+  `};
+`
+
+export const MealDescription = styled.Text`
+  line-height: 21px;
+  margin-bottom: 24px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.regular};
+    font-size: ${theme.fontSizes.md}px;
+    color: ${theme.colors['gray-200']};
+  `};
+`
+
+export const DateAndTime = styled.Text`
+  line-height: 18px;
+  margin-bottom: 8px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.bold};
+    font-size: ${theme.fontSizes.sm}px;
+    color: ${theme.colors['gray-100']};
+  `};
+`
+
+export const DateAndTimeText = styled.Text`
+  line-height: 21px;
+  margin-bottom: 24px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.regular};
+    font-size: ${theme.fontSizes.md}px;
+    color: ${theme.colors['gray-200']};
+  `};
+`
+
+export const Tag = styled(Select)`
+  padding: 8px 16px;
+  border-radius: 9999px;
+  align-self: flex-start;
+`
+
+export const ActionsContainer = styled.View`
+  margin-top: auto;
+  min-height: 108px;
+  justify-content: space-between;
+`
+
+export const LeftArrowButtonContainer = styled.TouchableOpacity`
+  background-color: transparent;
 `
 
 const arrowStatus = {
@@ -69,29 +130,6 @@ type LeftArrowButtonProps = SvgProps & {
   status?: keyof typeof arrowStatus
 }
 
-export const LeftArrowButtonContainer = styled.TouchableOpacity`
-  background-color: transparent;
-`
-
 export function LeftArrowButton({ status = 'neutral', ...rest }: LeftArrowButtonProps) {
   return <LeftArrow {...rest} stroke={arrowStatus[status]} />
 }
-
-export const DateTimeContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`
-
-export const OptionsContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`
-
-export const Option = styled.View`
-  min-width: 160px;
-`
-
-export const CreateMealButtonContainer = styled.View`
-  margin-top: auto;
-  margin-bottom: 30px;
-`;

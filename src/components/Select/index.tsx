@@ -1,15 +1,17 @@
-import { Container, Dot, Title, YesNo } from './styles'
+import { BoxStatus } from '@styles/global'
+import { TouchableOpacityProps } from 'react-native'
+import { Container, Dot, Title } from './styles'
 
-type Props = {
+type Props = TouchableOpacityProps & {
   isSelected?: boolean
   title: string
-  type?: YesNo
+  status?: BoxStatus
 }
 
-export function Select({ isSelected, title, type = 'no' }: Props) {
+export function Select({ isSelected, title, status = 'neutral', ...rest }: Props) {
   return (
-    <Container isSelected={isSelected} type={type}>
-      <Dot type={type} />
+    <Container isSelected={isSelected} status={status} {...rest}>
+      {status !== 'neutral' && <Dot status={status} />}
 
       <Title>{title}</Title>
     </Container>
