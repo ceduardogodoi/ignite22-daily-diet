@@ -1,52 +1,33 @@
-import { createContext, PropsWithChildren, useContext, useMemo } from 'react'
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useReducer
+} from 'react'
 
 import { AppStore } from '@models/AppStore'
-import { Entry } from '@models/Entry'
+import { Meal } from '@models/Meal'
 
-const entries: Entry[] = [
-  {
-    title: '12.08.22',
-    data: [
-      {
-        id: '1',
-        time: '20:00',
-        meal: 'X-tudo',
-        status: 'bad',
-      },
-      {
-        id: '2',
-        time: '20:10',
-        meal: 'Coca-cola',
-        status: 'bad',
-      }
-    ],
-  },
-  {
-    title: '13.09.22',
-    data: [
-      {
-        id: '3',
-        time: '11:00',
-        meal: 'Arroz e frango',
-        status: 'good'
-      }
-    ]
-  },
-]
+import { initialState, reducer } from './reducers'
 
-const initialState: AppStore = {
-  entries,
+type Context = AppStore & {
+  addMeal(meal: Meal): void
 }
 
-const AppContext = createContext({} as AppStore)
+const AppContext = createContext({} as Context)
 
 export function AppContextProvider({ children }: PropsWithChildren) {
-  const value = useMemo<AppStore>(() => {
-    return initialState
-  }, [])
+  const [state] = useReducer(reducer, initialState)
+
+  function addMeal(meal: Meal) {
+    // dispatch(addMealAction(meal))
+  }
 
   return (
-    <AppContext.Provider value={value}>
+    <AppContext.Provider value={{
+      entries: state,
+      addMeal,
+    }}>
       {children}
     </AppContext.Provider>
   )

@@ -3,4 +3,5 @@ export type Meal = {
   time: string
   meal: string
   status: 'bad' | 'good'
+  eatenAt: string
 }
