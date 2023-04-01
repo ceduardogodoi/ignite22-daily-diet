@@ -1,11 +1,11 @@
-import { Dimensions } from 'react-native';
-import { SvgProps } from 'react-native-svg';
+import { Dimensions } from 'react-native'
+import { SvgProps } from 'react-native-svg'
 import styled, { css } from 'styled-components/native'
 
 import { boxStatus, ContainerProps } from '@styles/global'
 
 import LeftArrow from '@assets/left-arrow.svg'
-import { Select } from '@components/Select';
+import { Select } from '@components/Select'
 
 const { height } = Dimensions.get('window');
 

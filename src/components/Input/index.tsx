@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 import {
   TextInput as NativeTextInput,
   TextInputProps as NativeTextInputProps,
-} from 'react-native';
-import { useTheme } from 'styled-components/native';
+} from 'react-native'
+import { useTheme } from 'styled-components/native'
 
-import { Container, CustomTextInput, Label } from './styles';
+import { Container, CustomTextInput, Label } from './styles'
 
 type InputProps = NativeTextInputProps & {
   fullWidth?: boolean;

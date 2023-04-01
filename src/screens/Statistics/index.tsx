@@ -1,4 +1,4 @@
-import { FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native'
 
 import {
   Header,
@@ -12,7 +12,7 @@ import {
   BoxDescription,
   StatusBar,
   LeftArrowButton,
-} from './styles';
+} from './styles'
 
 import type { BoxStatus } from './styles'
 

@@ -3,8 +3,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { Nunito_400Regular, Nunito_700Bold, useFonts } from '@expo-google-fonts/nunito'
 
+import { AppContextProvider } from '@contexts/AppContextProvider'
 import { Routes } from '@routes'
-
 import { theme } from '@theme'
 
 export default function App() {
@@ -17,7 +17,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
         <NavigationContainer>
-          <Routes />
+          <AppContextProvider>
+            <Routes />
+          </AppContextProvider>
         </NavigationContainer>
       </SafeAreaProvider>
     </ThemeProvider>

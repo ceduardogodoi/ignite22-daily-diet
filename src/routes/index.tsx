@@ -22,7 +22,7 @@ export function Routes() {
     <Stack.Navigator screenOptions={{
       headerShown: false,
     }}
-      initialRouteName="MealDetail"
+      initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Statistics" component={Statistics} />

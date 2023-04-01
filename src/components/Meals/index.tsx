@@ -1,30 +1,15 @@
-import { FlatList, View } from 'react-native';
+import { SectionList, View } from 'react-native'
+
+import { useAppContext } from '@contexts/AppContextProvider'
 
 import { Button } from '@components/Button'
-import { MealItem } from './components/MealItem';
+import { MealItem } from './components/MealItem'
 
 import { Container, Day, Header, Title } from './styles'
 
-type Meal = {
-  time: string
-  meal: string
-  status: 'bad' | 'good'
-}
-
-const meals: Meal[] = [
-  {
-    time: '20:00',
-    meal: 'X-tudo',
-    status: 'bad',
-  },
-  {
-    time: '11:00',
-    meal: 'Arroz e frango',
-    status: 'good',
-  },
-]
-
 export function Meals() {
+  const { entries } = useAppContext()
+
   function handleAddMeal() {
     console.log('add new meal tapped...');
   }
@@ -43,15 +28,16 @@ export function Meals() {
       </Header>
 
       <View>
-        <Day>12.08.22</Day>
-
-      <FlatList
-        data={meals}
-        keyExtractor={(_, index) => String(index)}
-        renderItem={({ item }) => {
-          return <MealItem {...item} />
-        }}
-      />
+        <SectionList
+          sections={entries}
+          keyExtractor={entry => String(entry.id)}
+          renderSectionHeader={({ section: { title } }) => (
+            <Day>{title}</Day>
+          )}
+          renderItem={({ item }) => (
+            <MealItem {...item} />
+          )}
+        />
       </View>
     </Container>
   )

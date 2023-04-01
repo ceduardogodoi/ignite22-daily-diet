@@ -1,8 +1,8 @@
-import { SvgProps } from 'react-native-svg';
+import { SvgProps } from 'react-native-svg'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled, { css } from 'styled-components/native'
 
-import { BoxStatus, boxStatus, ContainerProps } from '@styles/global';
+import { BoxStatus, boxStatus, ContainerProps } from '@styles/global'
 
 import LeftArrow from '@assets/left-arrow.svg'
 

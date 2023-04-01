@@ -20,7 +20,7 @@ import {
   Tag,
   Title,
   TitleContainer
-} from './styles';
+} from './styles'
 
 type Props = {
   status?: BoxStatus
