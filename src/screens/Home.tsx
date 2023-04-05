@@ -1,5 +1,5 @@
 import { DefaultLayout } from '@layouts/Default'
-import { Meals } from '@components/Meals'
+import { MealsList } from '@components/MealsList'
 import { PercentBox } from '@components/PercentBox'
 
 export function HomeScreen() {
@@ -7,7 +7,7 @@ export function HomeScreen() {
     <DefaultLayout>
       <PercentBox />
 
-      <Meals />
+      <MealsList />
     </DefaultLayout>
   )
 }

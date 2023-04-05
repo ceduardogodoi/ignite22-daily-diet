@@ -1,17 +1,21 @@
 import { SectionList, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { useAppContext } from '@store/AppContextProvider'
 
 import { Button } from '@components/Button'
 import { MealItem } from './components/MealItem'
 
+import { AppNavigatorRoutesProps } from '@routes'
+
 import { Container, Day, Header, Title } from './styles'
 
-export function Meals() {
+export function MealsList() {
   const { meals } = useAppContext()
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleAddMeal() {
-    console.log('add new meal tapped...');
+    navigation.navigate('AddMeal')
   }
 
   return (

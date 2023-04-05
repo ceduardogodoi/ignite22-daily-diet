@@ -1,8 +1,12 @@
+import { useNavigation } from '@react-navigation/native'
 import { Button } from '@components/Button'
 import { InputField } from '@components/Field'
 import { Select } from '@components/Select'
 import { StatusBar } from '@components/StatusBar'
 import { Label } from '@components/Typography'
+
+import { AppNavigatorRoutesProps } from '@routes'
+
 import {
   Container,
   CreateMealButtonContainer,
@@ -18,12 +22,18 @@ import {
 } from './styles'
 
 export function AddMeal() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  function handleArrowPress() {
+    navigation.navigate('Home')
+  }
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
 
       <Header>
-        <LeftArrowButtonContainer>
+        <LeftArrowButtonContainer onPress={handleArrowPress}>
           <LeftArrowButton />
         </LeftArrowButtonContainer>
 
