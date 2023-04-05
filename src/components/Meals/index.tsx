@@ -1,6 +1,6 @@
 import { SectionList, View } from 'react-native'
 
-import { useAppContext } from '@contexts/AppContextProvider'
+import { useAppContext } from '@store/AppContextProvider'
 
 import { Button } from '@components/Button'
 import { MealItem } from './components/MealItem'
@@ -8,7 +8,7 @@ import { MealItem } from './components/MealItem'
 import { Container, Day, Header, Title } from './styles'
 
 export function Meals() {
-  const { entries } = useAppContext()
+  const { meals } = useAppContext()
 
   function handleAddMeal() {
     console.log('add new meal tapped...');
@@ -29,8 +29,8 @@ export function Meals() {
 
       <View>
         <SectionList
-          sections={entries}
-          keyExtractor={entry => String(entry.id)}
+          sections={meals}
+          keyExtractor={meal => String(meal.id)}
           renderSectionHeader={({ section: { title } }) => (
             <Day>{title}</Day>
           )}

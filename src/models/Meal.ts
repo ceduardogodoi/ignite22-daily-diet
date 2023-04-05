@@ -5,3 +5,5 @@ export type Meal = {
   status: 'bad' | 'good'
   eatenAt: string
 }
+
+export type MealSectionList = Array<{ title: string, data: Meal[] }>

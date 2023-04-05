@@ -10,7 +10,7 @@ type Action =
     payload: string
   }
 
-const meals: Meal[] = [
+const data: Meal[] = [
   {
     id: '1',
     time: '20:00',
@@ -34,7 +34,7 @@ const meals: Meal[] = [
   }
 ]
 
-export const initialState: Meal[] = meals
+export const initialState: Meal[] = data
 
 export function reducer(state = initialState, action: Action): Meal[] {
   switch (action.type) {

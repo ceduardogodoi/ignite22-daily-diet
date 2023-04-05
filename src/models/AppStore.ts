@@ -1,5 +1,9 @@
-import { Meal } from './Meal'
+import { Meal, MealSectionList } from './Meal'
 
 export type AppStore = {
-  entries: Meal[]
+  meals: MealSectionList
+}
+
+export type Context = AppStore & {
+  addMeal(meal: Meal): void
 }
