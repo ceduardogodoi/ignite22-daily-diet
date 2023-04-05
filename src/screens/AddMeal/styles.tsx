@@ -71,6 +71,7 @@ type LeftArrowButtonProps = SvgProps & {
 
 export const LeftArrowButtonContainer = styled.TouchableOpacity`
   background-color: transparent;
+  z-index: 1;
 `
 
 export function LeftArrowButton({ status = 'neutral', ...rest }: LeftArrowButtonProps) {
