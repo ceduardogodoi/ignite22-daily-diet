@@ -20,13 +20,24 @@ import {
   Title,
   TitleContainer
 } from './styles'
+import { useAppContext } from '@store/AppContextProvider'
+import { Meal } from '@models/Meal'
 
 export function AddMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
+  // const { addMeal } = useAppContext()
 
   function handleArrowPress() {
     navigation.navigate('Home')
   }
+
+  // function handleAddMeal() {
+  //   const meal = {
+  //     meal: 'Arroz com frango', 
+  //   } as Meal
+
+  //   addMeal(meal)
+  // }
 
   return (
     <Container>
@@ -62,7 +73,10 @@ export function AddMeal() {
         </OptionsContainer>
 
         <CreateMealButtonContainer>
-          <Button title="Cadastrar refeição" />
+          <Button
+            title="Cadastrar refeição"
+            // onPress={handleAddMeal}
+          />
         </CreateMealButtonContainer>
       </MainContent>
     </Container>

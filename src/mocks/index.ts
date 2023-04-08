@@ -1,5 +1,7 @@
 import { Meal } from '@models/Meal'
 
+export const emptyMeals: Meal[] = []
+
 export const meals: Meal[] = [
   {
     id: '1',
