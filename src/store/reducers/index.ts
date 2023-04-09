@@ -1,5 +1,6 @@
-import { Meal } from '@models/Meal'
 import { Action } from '@store/actions'
+
+import { Meal } from '@models/Meal'
 
 export function reducer(state: Meal[], action: Action): Meal[] {
   switch (action.type) {

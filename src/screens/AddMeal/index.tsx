@@ -1,4 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
+import { Controller, useForm } from 'react-hook-form'
+
 import { Button } from '@components/Button'
 import { InputField } from '@components/Field'
 import { Select } from '@components/Select'
@@ -20,24 +22,30 @@ import {
   Title,
   TitleContainer
 } from './styles'
-import { useAppContext } from '@store/AppContextProvider'
-import { Meal } from '@models/Meal'
+
+type FormData = {
+  id?: string
+  time: string
+  meal: string
+  description?: string
+  status: 'bad' | 'good'
+  eatenAt: string
+}
 
 export function AddMeal() {
-  const navigation = useNavigation<AppNavigatorRoutesProps>();
-  // const { addMeal } = useAppContext()
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  const { control, handleSubmit, setValue, watch } = useForm<FormData>()
+
+  const status = watch('status')
 
   function handleArrowPress() {
     navigation.navigate('Home')
   }
 
-  // function handleAddMeal() {
-  //   const meal = {
-  //     meal: 'Arroz com frango', 
-  //   } as Meal
-
-  //   addMeal(meal)
-  // }
+  function submit(data: FormData) {
+    console.log(JSON.stringify(data, null, 2));
+  }
 
   return (
     <Container>
@@ -54,28 +62,100 @@ export function AddMeal() {
       </Header>
 
       <MainContent>
-        <InputField label="Nome" />
-        <InputField label="Descrição" multiline />
+        <Controller
+          name="meal"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputField
+              label="Nome"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+        />
+
+        <Controller
+          name="description"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputField
+              label="Descrição"
+              multiline
+              style={{ textAlignVertical: 'top' }}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+        />
 
         <DateTimeContainer>
-          <InputField label="Data" style={{ minWidth: 160 }} />
-          <InputField label="Hora" style={{ minWidth: 160 }} />
+          <Controller
+            name="eatenAt"
+            control={control}
+            render={({ field: { onBlur, onChange, value } }) => (
+              <InputField
+                label="Data"
+                style={{ minWidth: 160 }}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+          />
+          <Controller
+            name="time"
+            control={control}
+            render={({ field: { onBlur, onChange, value } }) => (
+              <InputField
+                label="Hora"
+                style={{ minWidth: 160 }}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+          />
         </DateTimeContainer>
 
         <Label>Está dentro da dieta?</Label>
         <OptionsContainer>
-          <Option>
-            <Select title="Sim" status="success" />
-          </Option>
-          <Option>
-            <Select title="Não" status="fail" />
-          </Option>
+          <Controller
+            name="status"
+            control={control}
+            render={() => (
+              <Option>
+                <Select
+                  title="Sim"
+                  status="success"
+                  isSelected={status === 'good'}
+                  onPress={() => setValue('status', 'good')}
+                />
+              </Option>
+            )}
+          />
+
+          <Controller
+            name="status"
+            control={control}
+            render={() => (
+              <Option>
+                <Select
+                  title="Não"
+                  status="fail"
+                  isSelected={status === 'bad'}
+                  onPress={() => setValue('status', 'bad')}
+                />
+              </Option>
+            )}
+          />
         </OptionsContainer>
 
         <CreateMealButtonContainer>
           <Button
             title="Cadastrar refeição"
-            // onPress={handleAddMeal}
+            onPress={handleSubmit(submit)}
           />
         </CreateMealButtonContainer>
       </MainContent>
