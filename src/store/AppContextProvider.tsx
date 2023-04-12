@@ -54,7 +54,7 @@ export function AppContextProvider({ children }: PropsWithChildren) {
       deleteMeal,
       updateMeal,
     } satisfies Context
-  }, [])
+  }, [state])
 
   return (
     <AppContext.Provider value={value}>

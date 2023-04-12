@@ -12,6 +12,7 @@ import { Container, Day, Header, Title } from './styles'
 
 export function MealsList() {
   const { meals } = useAppContext()
+
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleAddMeal() {

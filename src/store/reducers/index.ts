@@ -5,7 +5,7 @@ import { Meal } from '@models/Meal'
 export function reducer(state: Meal[], action: Action): Meal[] {
   switch (action.type) {
     case 'meal/add': {
-      const meal = action.payload
+      const meal = new Meal(action.payload)
 
       return [...state, meal]
     }
@@ -17,13 +17,13 @@ export function reducer(state: Meal[], action: Action): Meal[] {
     }
 
     case 'meal/update': {
-      const index = state.findIndex(meal => meal.id === meal.id)
+      const payloadMeal = action.payload
+      const index = state.findIndex(meal => meal.id === payloadMeal.id)
       if (index < 0) {
         return state
       }
 
-      const meal = action.payload
-      state.splice(index, 1, meal)
+      state.splice(index, 1, payloadMeal)
 
       return [...state]
     }

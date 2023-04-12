@@ -9,6 +9,8 @@ import { Label } from '@components/Typography'
 
 import { AppNavigatorRoutesProps } from '@routes'
 
+import { useAppContext } from '@store/AppContextProvider'
+
 import {
   Container,
   CreateMealButtonContainer,
@@ -19,6 +21,7 @@ import {
   MainContent,
   Option,
   OptionsContainer,
+  Separator,
   Title,
   TitleContainer
 } from './styles'
@@ -35,8 +38,17 @@ type FormData = {
 export function AddMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  const { control, handleSubmit, setValue, watch } = useForm<FormData>()
+  const { addMeal } = useAppContext()
 
+  const { control, handleSubmit, setValue, watch } = useForm<FormData>({
+    defaultValues: {
+      meal: 'Arroz branco',
+      description: 'Arroz branco cozido',
+      eatenAt: '11/04/2023',
+      time: '22:36',
+      status: 'good',
+    }
+  })
   const status = watch('status')
 
   function handleArrowPress() {
@@ -44,7 +56,7 @@ export function AddMeal() {
   }
 
   function submit(data: FormData) {
-    console.log(JSON.stringify(data, null, 2));
+    addMeal(data)
   }
 
   return (
@@ -97,23 +109,26 @@ export function AddMeal() {
             render={({ field: { onBlur, onChange, value } }) => (
               <InputField
                 label="Data"
-                style={{ minWidth: 160 }}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                style={{ minWidth: '47.5%' }}
               />
             )}
           />
+
+          <Separator style={{ minWidth: '5%' }} />
+
           <Controller
             name="time"
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputField
                 label="Hora"
-                style={{ minWidth: 160 }}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                style={{ minWidth: '47.5%' }}
               />
             )}
           />
@@ -131,10 +146,13 @@ export function AddMeal() {
                   status="success"
                   isSelected={status === 'good'}
                   onPress={() => setValue('status', 'good')}
+                  style={{ minWidth: '47.5%' }}
                 />
               </Option>
             )}
           />
+
+          <Separator style={{ minWidth: '5%'}} />
 
           <Controller
             name="status"
@@ -146,6 +164,7 @@ export function AddMeal() {
                   status="fail"
                   isSelected={status === 'bad'}
                   onPress={() => setValue('status', 'bad')}
+                  style={{ minWidth: '47.5%' }}
                 />
               </Option>
             )}

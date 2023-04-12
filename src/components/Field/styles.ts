@@ -1,7 +1,15 @@
 import styled, { css } from 'styled-components/native'
 
-export const Container = styled.View`
+type ContainerProps = {
+  fullWidth: boolean
+}
+
+export const Container = styled.View<ContainerProps>`
   margin-bottom: 24px;
+
+  ${({ fullWidth }) => fullWidth && css`
+    width: 100%;
+  `}
 `
 
 export const Label = styled.Text`

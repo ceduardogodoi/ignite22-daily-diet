@@ -80,7 +80,7 @@ export function LeftArrowButton({ status = 'neutral', ...rest }: LeftArrowButton
 
 export const DateTimeContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  width: 100%;
 `
 
 export const OptionsContainer = styled.View`
@@ -96,3 +96,7 @@ export const CreateMealButtonContainer = styled.View`
   margin-top: auto;
   margin-bottom: 30px;
 `;
+
+export const Separator = styled.View`
+  width: 20px;
+`
