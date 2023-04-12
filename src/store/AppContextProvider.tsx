@@ -5,11 +5,14 @@ import {
   useMemo,
   useReducer
 } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 import { reducer } from './reducers'
 import { addMealAction, deleteMealAction, updateMealAction } from './actions'
 
 import { emptyMeals } from '../mocks'
+
+import { AppNavigatorRoutesProps } from '@routes'
 
 import { Context } from '@models/AppStore'
 import { Meal, MealSectionList } from '@models/Meal'
@@ -20,6 +23,8 @@ const AppContext = createContext({} as Context)
 
 export function AppContextProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const value = useMemo(() => {
     const meals = state.reduce<MealSectionList>((accumulator, meal) => {
@@ -38,6 +43,10 @@ export function AppContextProvider({ children }: PropsWithChildren) {
 
     function addMeal(meal: Meal) {
       dispatch(addMealAction(meal))
+
+      navigation.navigate('Feedback', {
+        variant: meal.status,
+      })
     }
 
     function deleteMeal(mealId: string) {

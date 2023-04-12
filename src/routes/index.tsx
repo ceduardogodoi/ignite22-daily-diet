@@ -5,11 +5,11 @@ import { Statistics } from '@screens/Statistics'
 import { Feedback } from '@screens/Feedback'
 import { MealDetail } from '@screens/MealDetail'
 
-type AppRoutes = {
+export type AppRoutes = {
   Home: undefined
   Statistics: undefined
   AddMeal: undefined
-  Feedback: undefined
+  Feedback: { variant: 'bad' | 'good' }
   MealDetail: undefined
 }
 

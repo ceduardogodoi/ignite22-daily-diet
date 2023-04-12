@@ -1,44 +1,25 @@
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 
 import { Button } from '@components/Button'
+import { DescriptionHighlight } from './components/DescriptionHighlight'
 
-import { Container, Description, Highlight, Image, Title } from './styles'
+import { Container, Image, Title } from './styles'
 
 import illustrationHappy from '@assets/illustration-happy.png'
 import illustrationSad from '@assets/illustration-sad.png'
 
-import type { AppNavigatorRoutesProps } from '@routes'
+import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
-type Props = {
-  good?: boolean
-}
+type FeedbackScreenRouteProp = RouteProp<AppRoutes, 'Feedback'>
 
-type DescriptionHighlightProps = {
-  variant?: 'good' | 'bad'
-}
-
-function DescriptionHighlight({ variant = 'bad' }: DescriptionHighlightProps) {
-  if (variant === 'bad') {
-    return (
-      <Description>
-        Você <Highlight>saiu da dieta</Highlight> dessa vez, mas continue se esforçando e não desista!
-      </Description>
-    )
-  }
-
-  return (
-    <Description>
-      Você continua <Highlight>dentro da dieta</Highlight>. Muito bem!
-    </Description>
-  )
-}
-
-export function Feedback({ good = false }: Props) {
+export function Feedback() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
-  const variant = good ? 'good' : 'bad'
-  const title = good ? 'Continue assim!' : 'Que pena!'
-  const image = good ? illustrationHappy : illustrationSad
+  const route = useRoute<FeedbackScreenRouteProp>()
+  const { variant } = route.params
+
+  const title = variant === 'good' ? 'Continue assim!' : 'Que pena!'
+  const image = variant === 'good' ? illustrationHappy : illustrationSad
 
   function handleGoHome() {
     navigation.navigate('Home');
