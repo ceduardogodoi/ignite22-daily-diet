@@ -53,7 +53,7 @@ export function MealsList() {
           <Day>{title}</Day>
         )}
         renderItem={({ item }) => (
-          <MealItem {...item} />
+          <MealItem meal={item} />
         )}
       />
     </Container>

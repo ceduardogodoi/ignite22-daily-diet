@@ -10,7 +10,7 @@ export type AppRoutes = {
   Statistics: undefined
   AddMeal: undefined
   Feedback: { variant: 'bad' | 'good' }
-  MealDetail: undefined
+  MealDetail: { mealId?: string }
 }
 
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>

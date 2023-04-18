@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { RouteProp, useRoute } from '@react-navigation/native'
 
 import { Button } from '@components/Button'
 import { RemoveMealModal } from '@components/RemoveMealModal'
 import { StatusBar } from '@components/StatusBar'
+
+import { AppRoutes } from '@routes'
 
 import { BoxStatus } from '@styles/global'
 
@@ -28,6 +31,9 @@ type Props = {
 
 export function MealDetail({ status = 'neutral' }: Props) {
   const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
+
+  const route = useRoute<RouteProp<AppRoutes, 'MealDetail'>>()
+  console.log(JSON.stringify(route, null, 2))
 
   function handleOpenRemoveMealModal() {
     setRemoveMealModalOpen(true);

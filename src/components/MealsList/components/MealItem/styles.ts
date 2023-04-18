@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native'
 
 import { theme } from '@theme'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   padding: 14px 16px 14px 12px;
   flex-direction: row;
   align-items: center;
@@ -40,7 +40,7 @@ export const MealContainer = styled.Text`
   flex: 1;
 `
 
-export const Meal = styled.Text`
+export const MealName = styled.Text`
   line-height: 21px;
 
   ${({ theme }) => css`

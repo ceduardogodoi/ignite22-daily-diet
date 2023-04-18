@@ -1,23 +1,34 @@
-import { Container, Meal, MealContainer, Status, Time, TimeContainer } from './styles'
+import { useNavigation } from '@react-navigation/native'
+import { Container, MealName, MealContainer, Status, Time, TimeContainer } from './styles'
+
+import { AppNavigatorRoutesProps } from '@routes'
+
+import { Meal } from '@models/Meal'
 
 type MealItemProps = {
-  time: string
-  meal: string
-  status: 'bad' | 'good'
+  meal: Meal
 }
 
-export function MealItem({ time, meal, status }: MealItemProps) {
+export function MealItem({ meal }: MealItemProps) {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  function handleMealDetail() {
+    navigation.navigate('MealDetail', {
+      mealId: meal.id,
+    })
+  }
+
   return (
-    <Container>
+    <Container onPress={handleMealDetail}>
       <TimeContainer>
-        <Time>{time}</Time>
+        <Time>{meal.time}</Time>
       </TimeContainer>
 
       <MealContainer>
-        <Meal>{meal}</Meal>
+        <MealName>{meal.meal}</MealName>
       </MealContainer>
 
-      <Status status={status} />
+      <Status status={meal.status} />
     </Container>
   )
 }
