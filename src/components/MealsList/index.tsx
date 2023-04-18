@@ -46,18 +46,16 @@ export function MealsList() {
         )}
       </Header>
 
-      <View>
-        <SectionList
-          sections={meals}
-          keyExtractor={meal => String(meal.id)}
-          renderSectionHeader={({ section: { title } }) => (
-            <Day>{title}</Day>
-          )}
-          renderItem={({ item }) => (
-            <MealItem {...item} />
-          )}
-        />
-      </View>
+      <SectionList
+        sections={meals}
+        keyExtractor={meal => String(meal.id)}
+        renderSectionHeader={({ section: { title } }) => (
+          <Day>{title}</Day>
+        )}
+        renderItem={({ item }) => (
+          <MealItem {...item} />
+        )}
+      />
     </Container>
   )
 }
