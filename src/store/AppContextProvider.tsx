@@ -2,13 +2,16 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
+  useEffect,
   useMemo,
   useReducer
 } from 'react'
+import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { reducer } from './reducers'
-import { addMealAction, deleteMealAction, updateMealAction } from './actions'
+import { addStorageMealAsync, fetchStorageMealsAsync } from './reducers/async'
+import { deleteMealAction, resetMealsAction, updateMealAction } from './actions'
 
 import { emptyMeals } from '../mocks'
 
@@ -16,6 +19,7 @@ import { AppNavigatorRoutesProps } from '@routes'
 
 import { Context } from '@models/AppStore'
 import { Meal, MealSectionList } from '@models/Meal'
+import { resetStorageMeals } from './reducers/storage'
 
 export const initialState: Meal[] = emptyMeals
 
@@ -42,7 +46,7 @@ export function AppContextProvider({ children }: PropsWithChildren) {
     }, [])
 
     function addMeal(meal: Meal) {
-      dispatch(addMealAction(meal))
+      addStorageMealAsync(dispatch, meal)
 
       navigation.navigate('Feedback', {
         variant: meal.status,
@@ -57,13 +61,26 @@ export function AppContextProvider({ children }: PropsWithChildren) {
       dispatch(updateMealAction(meal))
     }
 
+    async function resetMeals() {
+      await resetStorageMeals()
+
+      dispatch(resetMealsAction())
+
+      Alert.alert('Meals cleaned', 'Your meals storage was cleaned.')
+    }
+
     return {
       meals,
       addMeal,
       deleteMeal,
       updateMeal,
+      resetMeals,
     } satisfies Context
   }, [state])
+
+  useEffect(() => {
+    fetchStorageMealsAsync(dispatch)
+  }, [])
 
   return (
     <AppContext.Provider value={value}>

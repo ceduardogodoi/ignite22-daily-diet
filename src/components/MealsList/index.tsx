@@ -11,12 +11,17 @@ import { AppNavigatorRoutesProps } from '@routes'
 import { Container, Day, Header, Title } from './styles'
 
 export function MealsList() {
-  const { meals } = useAppContext()
+  const { meals, resetMeals } = useAppContext()
+  // console.log('meals:', JSON.stringify(meals, null, 2))
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleAddMeal() {
     navigation.navigate('AddMeal')
+  }
+
+  async function handleResetMeals() {
+    await resetMeals()
   }
 
   return (
@@ -30,6 +35,15 @@ export function MealsList() {
           icon="plus"
           onPress={handleAddMeal}
         />
+
+        {!!meals.length && (
+          <Button
+            variant="outline"
+            icon="trash"
+            fullWidth={false}
+            onPress={handleResetMeals}
+          />
+        )}
       </Header>
 
       <View>

@@ -8,4 +8,5 @@ export type Context = AppStore & {
   addMeal(meal: Meal): void
   deleteMeal(mealId: string): void
   updateMeal(meal: Meal): void
+  resetMeals(): Promise<void>
 }

@@ -24,7 +24,8 @@ export const variants: Variants = {
 }
 
 type Props = {
-  variant: Variant
+  variant: Variant,
+  fullWidth: boolean
 }
 
 export const Container = styled.Pressable<Props>`
@@ -40,9 +41,15 @@ export const Container = styled.Pressable<Props>`
     border-style: solid;
     border-width: 1px;
   `}
+
+  ${({ fullWidth }) => css`
+    width: ${fullWidth ? '100%' : 0};
+  `}
 `
 
-export const Title = styled.Text<Props>`
+type TitleProps = Pick<Props, 'variant'>
+
+export const Title = styled.Text<TitleProps>`
   ${({ variant }) => css`
     color: ${variants[variant].color};
     font-family: ${theme.fonts.bold};
@@ -55,4 +62,8 @@ export const Icon = styled(IconComponent).attrs(({ variant = 'solid' }) => ({
   color: variants[variant].color,
 }))`
   margin-right: 12px;
+`
+
+export const IconOnly = styled(Icon)`
+  margin-right: 0;
 `

@@ -42,12 +42,12 @@ export function AddMeal() {
 
   const { control, handleSubmit, setValue, watch } = useForm<FormData>({
     defaultValues: {
-      meal: 'Arroz branco',
-      description: 'Arroz branco cozido',
-      eatenAt: '11/04/2023',
-      time: '22:36',
+      meal: 'Arroz',
+      description: 'Arroz branco',
+      eatenAt: '17/04/2023',
+      time: '21:32',
       status: 'good',
-    }
+    },
   })
   const status = watch('status')
 

@@ -4,16 +4,21 @@ import { Meal } from '@models/Meal'
 
 export function reducer(state: Meal[], action: Action): Meal[] {
   switch (action.type) {
-    case 'meal/add': {
-      const meal = new Meal(action.payload)
+    case 'meal/set': {
+      const meals = action.payload
+      return meals
+    }
 
-      return [...state, meal]
+    case 'meal/add': {
+      const meal = action.payload
+      const meals = [...state, meal]
+      return meals
     }
 
     case 'meal/delete': {
       const mealId = action.payload
-
-      return state.filter(meal => meal.id !== mealId);
+      const meals = state.filter(meal => meal.id !== mealId)
+      return meals
     }
 
     case 'meal/update': {
@@ -22,10 +27,14 @@ export function reducer(state: Meal[], action: Action): Meal[] {
       if (index < 0) {
         return state
       }
-
       state.splice(index, 1, payloadMeal)
 
-      return [...state]
+      const meals = [...state]
+      return meals
+    }
+
+    case 'meal/reset': {
+      return [] as Meal[]
     }
 
     default: {
