@@ -37,7 +37,7 @@ export function MealsList() {
           onPress={handleAddMeal}
         />
 
-        {!!meals.length && (
+        {false && (
           <Button
             variant="outline"
             icon="trash"
