@@ -67,7 +67,9 @@ export function MealDetail() {
   }
 
   function handleEditMeal() {
-    console.log(JSON.stringify(meal, null, 2));
+    navigation.navigate('AddEditMeal', {
+      meal,
+    })
   }
 
   let tagText: string | undefined

@@ -18,7 +18,7 @@ export function MealsList() {
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleAddMeal() {
-    navigation.navigate('AddMeal')
+    navigation.navigate('AddEditMeal')
   }
 
   async function handleResetMeals() {

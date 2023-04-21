@@ -11,7 +11,7 @@ import { Meal } from '@models/Meal'
 export type AppRoutes = {
   Home: undefined
   Statistics: undefined
-  AddEditMeal: undefined
+  AddEditMeal: { meal: Meal } | undefined
   Feedback: { variant: 'bad' | 'good' }
   MealDetail: { meal: Meal }
 }
