@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 
 import { Button } from '@components/Button'
 import { RemoveMealModal } from '@components/RemoveMealModal'
 import { StatusBar } from '@components/StatusBar'
 
-import { AppRoutes } from '@routes'
+import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
 import { BoxStatus } from '@styles/global'
 
@@ -25,15 +25,33 @@ import {
   TitleContainer
 } from './styles'
 
-type Props = {
-  status?: BoxStatus
-}
-
-export function MealDetail({ status = 'neutral' }: Props) {
-  const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
+export function MealDetail() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const route = useRoute<RouteProp<AppRoutes, 'MealDetail'>>()
-  console.log(JSON.stringify(route, null, 2))
+  const { meal } = route.params
+
+  let status: 'fail' | 'success' | 'neutral';
+  switch (meal.status) {
+    case 'bad': {
+      status = 'fail'
+      break
+    }
+    case 'good': {
+      status = 'success'
+      break
+    }
+    default: {
+      status = 'neutral'
+    }
+  }
+
+  const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
+
+
+  function handleBack() {
+    navigation.navigate('Home')
+  }
 
   function handleOpenRemoveMealModal() {
     setRemoveMealModalOpen(true);
@@ -68,24 +86,24 @@ export function MealDetail({ status = 'neutral' }: Props) {
       <StatusBar barStyle="dark-content" status={status} />
 
       <Header status={status}>
-        <LeftArrowButtonContainer>
-          <LeftArrowButton status={status} />
-        </LeftArrowButtonContainer>
-
         <TitleContainer>
           <Title>Refeição</Title>
         </TitleContainer>
+
+        <LeftArrowButtonContainer onPress={handleBack}>
+          <LeftArrowButton status={status} />
+        </LeftArrowButtonContainer>
       </Header>
 
       <MainContent>
-        <MealName>Sanduíche</MealName>
+        <MealName>{meal.meal}</MealName>
 
         <MealDescription>
-          Sanduíche de pão integral com atum e salada de alface e tomate
+          {meal.description}
         </MealDescription>
 
         <DateAndTime>Data e hora</DateAndTime>
-        <DateAndTimeText>12/08/2022 às 16:00</DateAndTimeText>
+        <DateAndTimeText>{meal.eatenAt} às {meal.time}</DateAndTimeText>
 
         {tagText && <Tag title={tagText} status={status} disabled />}
 

@@ -1,4 +1,4 @@
-import { SectionList, View } from 'react-native'
+import { SectionList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { useAppContext } from '@store/AppContextProvider'
@@ -12,7 +12,6 @@ import { Container, Day, Header, Title } from './styles'
 
 export function MealsList() {
   const { meals, resetMeals } = useAppContext()
-  // console.log('meals:', JSON.stringify(meals, null, 2))
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 

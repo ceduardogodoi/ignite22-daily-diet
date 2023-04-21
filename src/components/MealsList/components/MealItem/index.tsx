@@ -14,7 +14,7 @@ export function MealItem({ meal }: MealItemProps) {
 
   function handleMealDetail() {
     navigation.navigate('MealDetail', {
-      mealId: meal.id,
+      meal,
     })
   }
 

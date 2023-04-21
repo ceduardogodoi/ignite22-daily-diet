@@ -30,11 +30,13 @@ export function RemoveMealModal({
             title="Cancelar"
             variant="outline"
             style={{ minWidth: 135 }}
+            fullWidth={false}
             onPress={handleClose}
           />
           <Button
             title="Sim, excluir"
             style={{ minWidth: 135 }}
+            fullWidth={false}
             onPress={handleConfirm}
           />
         </ActionsContainer>
