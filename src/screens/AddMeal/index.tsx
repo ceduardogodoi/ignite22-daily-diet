@@ -11,6 +11,8 @@ import { AppNavigatorRoutesProps } from '@routes'
 
 import { useAppContext } from '@store/AppContextProvider'
 
+import { MealDTO } from '@models/Meal'
+
 import {
   Container,
   CreateMealButtonContainer,
@@ -26,21 +28,12 @@ import {
   TitleContainer
 } from './styles'
 
-type FormData = {
-  id?: string
-  time: string
-  meal: string
-  description?: string
-  status: 'bad' | 'good'
-  eatenAt: string
-}
-
 export function AddMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const { addMeal } = useAppContext()
 
-  const { control, handleSubmit, setValue, watch } = useForm<FormData>({
+  const { control, handleSubmit, setValue, watch } = useForm<MealDTO>({
     defaultValues: {
       meal: 'Arroz',
       description: 'Arroz branco',
@@ -55,7 +48,7 @@ export function AddMeal() {
     navigation.navigate('Home')
   }
 
-  function submit(data: FormData) {
+  function submit(data: MealDTO) {
     addMeal(data)
   }
 
