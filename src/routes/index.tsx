@@ -1,6 +1,6 @@
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { AddMeal } from '@screens/AddMeal'
+import { AddEditMeal } from '@screens/AddEditMeal'
 import { HomeScreen } from '@screens/Home'
 import { Statistics } from '@screens/Statistics'
 import { Feedback } from '@screens/Feedback'
@@ -11,7 +11,7 @@ import { Meal } from '@models/Meal'
 export type AppRoutes = {
   Home: undefined
   Statistics: undefined
-  AddMeal: undefined
+  AddEditMeal: undefined
   Feedback: { variant: 'bad' | 'good' }
   MealDetail: { meal: Meal }
 }
@@ -29,7 +29,7 @@ export function Routes() {
     >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Statistics" component={Statistics} />
-      <Stack.Screen name="AddMeal" component={AddMeal} />
+      <Stack.Screen name="AddEditMeal" component={AddEditMeal} />
       <Stack.Screen name="Feedback" component={Feedback} />
       <Stack.Screen name="MealDetail" component={MealDetail} />
     </Stack.Navigator>

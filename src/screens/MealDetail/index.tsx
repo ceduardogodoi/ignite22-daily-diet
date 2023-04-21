@@ -7,6 +7,8 @@ import { StatusBar } from '@components/StatusBar'
 
 import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
+import { useAppContext } from '@store/AppContextProvider'
+
 import {
   ActionsContainer,
   Container,
@@ -22,7 +24,6 @@ import {
   Title,
   TitleContainer
 } from './styles'
-import { useAppContext } from '@store/AppContextProvider'
 
 export function MealDetail() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
@@ -63,6 +64,10 @@ export function MealDetail() {
 
   function handleConfirmRemoveMealModal() {
     deleteMeal(meal.id)
+  }
+
+  function handleEditMeal() {
+    console.log(JSON.stringify(meal, null, 2));
   }
 
   let tagText: string | undefined
@@ -111,6 +116,7 @@ export function MealDetail() {
           <Button
             title="Editar refeição"
             icon="pencil"
+            onPress={handleEditMeal}
           />
           <Button
             title="Excluir refeição"

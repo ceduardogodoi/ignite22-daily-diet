@@ -28,7 +28,7 @@ import {
   TitleContainer
 } from './styles'
 
-export function AddMeal() {
+export function AddEditMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const { addMeal } = useAppContext()
