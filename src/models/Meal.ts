@@ -7,7 +7,7 @@ type SectionAndData = {
 
 export type MealSectionList = SectionAndData[]
 
-export type MealDTO = Omit<Meal, 'id'>
+export type MealDTO = Omit<Meal, 'id'> & Partial<Pick<Meal, 'id'>>
 
 export class Meal {
   id: string
@@ -18,9 +18,14 @@ export class Meal {
   eatenAt: string
 
   constructor(data: MealDTO) {
-    const { time, meal, description, status, eatenAt } = data
+    const { id, time, meal, description, status, eatenAt } = data
 
-    this.id = uuid.v4().toString()
+    if (!id) {
+      this.id = uuid.v4().toString()
+    } else {
+      this.id = id
+    }
+
     this.time = time
     this.meal = meal
     this.description = description

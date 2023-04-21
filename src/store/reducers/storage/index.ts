@@ -5,7 +5,8 @@ const STORAGE_KEY_MEALS_LIST = '@dailydiet/meals'
 
 export async function getStorageMeals() {
   const stringifiedMeals = await AsyncStorage.getItem(STORAGE_KEY_MEALS_LIST) ?? '[]'
-  return JSON.parse(stringifiedMeals) as Meal[]
+  const mealsLike = JSON.parse(stringifiedMeals) as Meal[]
+  return mealsLike.map(meal => new Meal(meal))
 }
 
 async function _setStorageMeals(meals: Meal[]) {
