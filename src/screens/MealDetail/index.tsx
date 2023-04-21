@@ -7,8 +7,6 @@ import { StatusBar } from '@components/StatusBar'
 
 import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
-import { BoxStatus } from '@styles/global'
-
 import {
   ActionsContainer,
   Container,
@@ -24,12 +22,17 @@ import {
   Title,
   TitleContainer
 } from './styles'
+import { useAppContext } from '@store/AppContextProvider'
 
 export function MealDetail() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const route = useRoute<RouteProp<AppRoutes, 'MealDetail'>>()
   const { meal } = route.params
+
+  const { deleteMeal } = useAppContext()
+
+  const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
 
   let status: 'fail' | 'success' | 'neutral';
   switch (meal.status) {
@@ -46,9 +49,6 @@ export function MealDetail() {
     }
   }
 
-  const [isRemoveMealModalOpen, setRemoveMealModalOpen] = useState(false)
-
-
   function handleBack() {
     navigation.navigate('Home')
   }
@@ -62,7 +62,7 @@ export function MealDetail() {
   }
 
   function handleConfirmRemoveMealModal() {
-    console.log('to implement');
+    deleteMeal(meal.id)
   }
 
   let tagText: string | undefined
