@@ -8,13 +8,24 @@ export async function getStorageMeals() {
   return JSON.parse(stringifiedMeals) as Meal[]
 }
 
+async function _setStorageMeals(meals: Meal[]) {
+  const stringfiedMeals = JSON.stringify(meals)
+  await AsyncStorage.setItem(STORAGE_KEY_MEALS_LIST, stringfiedMeals)
+}
+
 export async function addStorageMeal(meal: Meal) {
   const storageMeals = await getStorageMeals()
   storageMeals.push(meal)
-  const newStringifiedMeals = JSON.stringify(storageMeals)
-  await AsyncStorage.setItem(STORAGE_KEY_MEALS_LIST, newStringifiedMeals)
+  await _setStorageMeals(storageMeals)
 }
 
 export async function resetStorageMeals() {
   await AsyncStorage.setItem(STORAGE_KEY_MEALS_LIST, '[]')
+}
+
+export async function deleteStorageMeal(mealId: string) {
+  const storageMeals = await getStorageMeals()
+  const index = storageMeals.findIndex(meal => mealId === meal.id)
+  storageMeals.splice(index, 1)
+  await _setStorageMeals(storageMeals)
 }

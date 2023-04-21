@@ -10,7 +10,11 @@ import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import { reducer } from './reducers'
-import { addStorageMealAsync, fetchStorageMealsAsync } from './reducers/async'
+import {
+  addStorageMealAsync,
+  deleteStorageMealAsync,
+  fetchStorageMealsAsync
+} from './reducers/async'
 import { resetMealsAction, updateMealAction } from './actions'
 
 import { emptyMeals } from '../mocks'
@@ -54,7 +58,7 @@ export function AppContextProvider({ children }: PropsWithChildren) {
     }
 
     function deleteMeal(mealId: string) {
-      // deleteStorageMealAsync(dispatch, mealId)
+      deleteStorageMealAsync(dispatch, mealId)
 
       navigation.navigate('Home')
     }

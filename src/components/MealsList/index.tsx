@@ -13,6 +13,8 @@ import { Container, Day, Header, Title } from './styles'
 export function MealsList() {
   const { meals, resetMeals } = useAppContext()
 
+  const mealsAmount = meals.flatMap(section => section.data).length
+
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
   function handleAddMeal() {
@@ -26,7 +28,7 @@ export function MealsList() {
   return (
     <Container>
       <Header>
-        <Title>Refeições</Title>
+        <Title>Refeições ({mealsAmount})</Title>
 
         <Button
           title="Nova refeição"

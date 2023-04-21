@@ -2,13 +2,16 @@ import { Dispatch } from 'react'
 
 import { Action, addMealAction, deleteMealAction, setMealsAction } from '@store/actions'
 
-import { addStorageMeal, getStorageMeals } from '../storage'
+import {
+  addStorageMeal,
+  deleteStorageMeal,
+  getStorageMeals
+} from '../storage'
 
 import { Meal, MealDTO } from '@models/Meal'
 
 export async function fetchStorageMealsAsync(dispatch: Dispatch<Action>) {
   const meals = await getStorageMeals()
-
   dispatch(setMealsAction(meals))
 }
 
@@ -20,8 +23,7 @@ export async function addStorageMealAsync(dispatch: Dispatch<Action>, meal: Meal
 }
 
 export async function deleteStorageMealAsync(dispatch: Dispatch<Action>, mealId: string) {
-  console.log(mealId)
-  // await deleteStorageMeal(mealWithId)
+  await deleteStorageMeal(mealId)
 
   dispatch(deleteMealAction(mealId))
 }
