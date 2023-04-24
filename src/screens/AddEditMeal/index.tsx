@@ -11,7 +11,7 @@ import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
 import { useAppContext } from '@store/AppContextProvider'
 
-import { MealDTO } from '@models/Meal'
+import { Meal, MealDTO } from '@models/Meal'
 
 import {
   Container,
@@ -32,9 +32,16 @@ export function AddEditMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
   const route = useRoute<RouteProp<AppRoutes, 'AddEditMeal'>>()
-  const editingMeal = route.params?.meal
+  const meal = route.params?.meal
 
-  const { addMeal } = useAppContext()
+  let editingMeal: Meal | undefined
+  if (meal) {
+    editingMeal = {
+      ...meal,
+    }
+  }
+
+  const { addMeal, updateMeal } = useAppContext()
 
   const { control, handleSubmit, setValue, watch } = useForm<MealDTO>({
     defaultValues: editingMeal,
@@ -46,7 +53,15 @@ export function AddEditMeal() {
   }
 
   function submit(data: MealDTO) {
-    // TODO: tratar quando nova refeição ou edição de refeição
+    if (editingMeal) {
+      const editedMeal: Meal = {
+        id: editingMeal.id,
+        ...data
+      }
+      updateMeal(editedMeal)
+      return
+    }
+
     addMeal(data)
   }
 
@@ -60,7 +75,7 @@ export function AddEditMeal() {
         </LeftArrowButtonContainer>
 
         <TitleContainer>
-          <Title>{editingMeal ? 'Editar' : 'Nova'} refeição</Title>
+          <Title>{meal ? 'Editar' : 'Nova'} refeição</Title>
         </TitleContainer>
       </Header>
 

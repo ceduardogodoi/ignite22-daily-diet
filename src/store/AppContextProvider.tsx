@@ -13,9 +13,10 @@ import { reducer } from './reducers'
 import {
   addStorageMealAsync,
   deleteStorageMealAsync,
-  fetchStorageMealsAsync
+  fetchStorageMealsAsync,
+  updateStorageMealAsync
 } from './reducers/async'
-import { resetMealsAction, updateMealAction } from './actions'
+import { resetMealsAction } from './actions'
 
 import { emptyMeals } from '../mocks'
 
@@ -64,7 +65,9 @@ export function AppContextProvider({ children }: PropsWithChildren) {
     }
 
     function updateMeal(meal: Meal) {
-      dispatch(updateMealAction(meal))
+      updateStorageMealAsync(dispatch, meal)
+
+      navigation.navigate('Home')
     }
 
     async function resetMeals() {

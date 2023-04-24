@@ -22,12 +22,12 @@ export function reducer(state: Meal[], action: Action): Meal[] {
     }
 
     case 'meal/update': {
-      const payloadMeal = action.payload
-      const index = state.findIndex(meal => meal.id === payloadMeal.id)
+      const updatedMeal = action.payload
+      const index = state.findIndex(meal => meal.id === updatedMeal.id)
       if (index < 0) {
         return state
       }
-      state.splice(index, 1, payloadMeal)
+      state.splice(index, 1, updatedMeal)
 
       const meals = [...state]
       return meals

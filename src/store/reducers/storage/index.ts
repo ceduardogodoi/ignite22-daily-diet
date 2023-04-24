@@ -30,3 +30,10 @@ export async function deleteStorageMeal(mealId: string) {
   storageMeals.splice(index, 1)
   await _setStorageMeals(storageMeals)
 }
+
+export async function updateStorageMeal(updatedMeal: Meal) {
+  const storageMeals = await getStorageMeals()
+  const index = storageMeals.findIndex(meal => updatedMeal.id === meal.id)
+  storageMeals.splice(index, 1, updatedMeal)
+  await _setStorageMeals(storageMeals)
+}
