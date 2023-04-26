@@ -53,16 +53,17 @@ export function AddEditMeal() {
   }
 
   function submit(data: MealDTO) {
-    if (editingMeal) {
-      const editedMeal: Meal = {
-        id: editingMeal.id,
-        ...data
-      }
-      updateMeal(editedMeal)
-      return
-    }
+    console.log(JSON.stringify(data, null, 2))
+    // if (editingMeal) {
+    //   const editedMeal: Meal = {
+    //     id: editingMeal.id,
+    //     ...data
+    //   }
+    //   updateMeal(editedMeal)
+    //   return
+    // }
 
-    addMeal(data)
+    // addMeal(data)
   }
 
   return (
@@ -119,6 +120,9 @@ export function AddEditMeal() {
                 onChangeText={onChange}
                 value={value}
                 style={{ minWidth: '47.5%' }}
+                keyboardType="number-pad"
+                mask="date"
+                maxLength={10}
               />
             )}
           />
@@ -135,6 +139,9 @@ export function AddEditMeal() {
                 onChangeText={onChange}
                 value={value}
                 style={{ minWidth: '47.5%' }}
+                keyboardType="number-pad"
+                mask="time"
+                maxLength={5}
               />
             )}
           />
