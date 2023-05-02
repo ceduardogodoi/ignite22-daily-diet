@@ -1,11 +1,13 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import { Button } from '@components/Button'
 import { InputField } from '@components/Field'
 import { Select } from '@components/Select'
 import { StatusBar } from '@components/StatusBar'
-import { Label } from '@components/Typography'
+import { ErrorMessage, Label } from '@components/Typography'
 
 import { AppNavigatorRoutesProps, AppRoutes } from '@routes'
 
@@ -28,6 +30,25 @@ import {
   TitleContainer
 } from './styles'
 
+const schema = z.object({
+  id: z.string().uuid().optional(),
+  time: z.string({
+    required_error: 'Hora é obrigatória',
+  }),
+  meal: z.string({
+    required_error: 'Nome é obrigatório',
+  }),
+  description: z.string().optional(),
+  status: z.enum(['bad', 'good'], {
+    required_error: 'Escolha uma opção',
+  }),
+  eatenAt: z.string({
+    required_error: 'Data é obrigatária',
+  }),
+})
+
+type FormData = z.output<typeof schema>
+
 export function AddEditMeal() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
 
@@ -43,8 +64,9 @@ export function AddEditMeal() {
 
   const { addMeal, updateMeal } = useAppContext()
 
-  const { control, handleSubmit, setValue, watch } = useForm<MealDTO>({
+  const { control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
     defaultValues: editingMeal,
+    resolver: zodResolver(schema)
   })
   const status = watch('status')
 
@@ -52,7 +74,7 @@ export function AddEditMeal() {
     navigation.navigate('Home')
   }
 
-  function submit(data: MealDTO) {
+  function submit(data: FormData) {
     console.log(JSON.stringify(data, null, 2))
     // if (editingMeal) {
     //   const editedMeal: Meal = {
@@ -65,6 +87,8 @@ export function AddEditMeal() {
 
     // addMeal(data)
   }
+
+  console.log(JSON.stringify(errors, null, 2))
 
   return (
     <Container>
@@ -90,6 +114,8 @@ export function AddEditMeal() {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              mandatory
+              error={errors.meal?.message}
             />
           )}
         />
@@ -105,6 +131,7 @@ export function AddEditMeal() {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              error={errors.description?.message}
             />
           )}
         />
@@ -119,10 +146,12 @@ export function AddEditMeal() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                mandatory
                 style={{ minWidth: '47.5%' }}
                 keyboardType="number-pad"
                 mask="date"
                 maxLength={10}
+                error={errors.eatenAt?.message}
               />
             )}
           />
@@ -138,16 +167,18 @@ export function AddEditMeal() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                mandatory
                 style={{ minWidth: '47.5%' }}
                 keyboardType="number-pad"
                 mask="time"
                 maxLength={5}
+                error={errors.time?.message}
               />
             )}
           />
         </DateTimeContainer>
 
-        <Label>Está dentro da dieta?</Label>
+        <Label>Está dentro da dieta?*</Label>
         <OptionsContainer>
           <Controller
             name="status"
@@ -165,7 +196,7 @@ export function AddEditMeal() {
             )}
           />
 
-          <Separator style={{ minWidth: '5%'}} />
+          <Separator style={{ minWidth: '5%' }} />
 
           <Controller
             name="status"
@@ -183,6 +214,9 @@ export function AddEditMeal() {
             )}
           />
         </OptionsContainer>
+        {Boolean(errors.status?.message) && (
+          <ErrorMessage>{errors.status?.message}</ErrorMessage>
+        )}
 
         <CreateMealButtonContainer>
           <Button

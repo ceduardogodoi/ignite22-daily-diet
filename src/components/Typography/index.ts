@@ -10,3 +10,11 @@ export const Label = styled.Text`
     color: ${theme.colors['gray-200']};
   `};
 `
+
+export const ErrorMessage = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.bold};
+    font-size: ${theme.fontSizes.xs}px;
+    color: ${theme.colors['red-dark']};
+  `};
+`
