@@ -33,17 +33,19 @@ function ButtonIconTitle({ icon, title, variant = 'solid' }: ButtonIconProps) {
 export function Button(props: Props) {
   const { title, icon, variant = 'solid', fullWidth = true, ...rest } = props
 
+  function getStyle({ pressed }: { pressed: boolean }) {
+    if (!pressed) {
+      return [{ backgroundColor: variants[variant].backgroundColor }]
+    }
+
+    return [{ backgroundColor: variants[variant].pressedBackground }]
+  }
+
   return (
     <Container
       variant={variant}
       fullWidth={fullWidth}
-      style={({ pressed }) => [
-        {
-          backgroundColor: pressed ?
-            variants[variant].pressedBackground :
-            variants[variant].backgroundColor
-        },
-      ]}
+      style={getStyle}
       {...rest}
     >
       <ButtonIconTitle title={title} icon={icon} variant={variant} />

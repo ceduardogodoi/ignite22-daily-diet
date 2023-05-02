@@ -1,5 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { Controller, useForm } from 'react-hook-form'
+import { parse } from 'date-fns'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -31,20 +32,41 @@ import {
 } from './styles'
 
 const schema = z.object({
-  id: z.string().uuid().optional(),
+  id: z.string()
+    .uuid()
+    .optional(),
   time: z.string({
     required_error: 'Hora é obrigatória',
-  }),
+  })
+    .regex(/^\d{2}:\d{2}$/, 'Formato: HH:mm')
+    .refine(value => {
+      const date = parse(`01/01/2023 ${value}:00`, 'dd/MM/yyyy HH:mm:ss', new Date())
+      const isValidDate = !Number.isNaN(date.getTime())
+      return isValidDate
+    }, {
+      message: 'Horário inválido'
+    }),
   meal: z.string({
     required_error: 'Nome é obrigatório',
-  }),
-  description: z.string().optional(),
+  })
+    .trim()
+    .min(3, `Deve ter mínimo 3 caracteres`),
+  description: z.string()
+    .optional(),
   status: z.enum(['bad', 'good'], {
     required_error: 'Escolha uma opção',
   }),
   eatenAt: z.string({
-    required_error: 'Data é obrigatária',
-  }),
+    required_error: 'Data é obrigatória',
+  })
+    .regex(/^\d{2}\/\d{2}\/\d{4}$/, 'Formato: dd/MM/aaaa')
+    .refine(value => {
+      const date = parse(value, 'dd/MM/yyyy', new Date())
+      const isValidDate = !Number.isNaN(date.getTime())
+      return isValidDate
+    }, {
+      message: 'Data inválida'
+    })
 })
 
 type FormData = z.output<typeof schema>
@@ -64,11 +86,19 @@ export function AddEditMeal() {
 
   const { addMeal, updateMeal } = useAppContext()
 
-  const { control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors }
+  } = useForm<FormData>({
     defaultValues: editingMeal,
     resolver: zodResolver(schema)
   })
   const status = watch('status')
+
+  const isValid = true
 
   function handleArrowPress() {
     navigation.navigate('Home')
@@ -88,7 +118,7 @@ export function AddEditMeal() {
     // addMeal(data)
   }
 
-  console.log(JSON.stringify(errors, null, 2))
+  // console.log(JSON.stringify(errors, null, 2))
 
   return (
     <Container>
@@ -218,12 +248,13 @@ export function AddEditMeal() {
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         )}
 
-        <CreateMealButtonContainer>
+        {isValid && <CreateMealButtonContainer>
           <Button
+            disabled={!isValid}
             title={editingMeal ? 'Salvar alterações' : 'Cadastrar refeição'}
             onPress={handleSubmit(submit)}
           />
-        </CreateMealButtonContainer>
+        </CreateMealButtonContainer>}
       </MainContent>
     </Container>
   )
