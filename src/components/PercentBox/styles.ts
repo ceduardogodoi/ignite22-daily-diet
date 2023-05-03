@@ -1,6 +1,28 @@
 import styled, { css } from 'styled-components/native'
 
-export const Container = styled.View`
+import { theme } from '@theme'
+import { BoxStatus } from '@styles/global'
+
+type ContainerProps = {
+  status?: Exclude<BoxStatus, 'neutral'>
+}
+
+type Variants = {
+  [key in Exclude<BoxStatus, 'neutral'>]: {
+    backgroundColor: string
+  }
+}
+
+const variants: Variants = {
+  success: {
+    backgroundColor: theme.colors['green-light'],
+  },
+  fail: {
+    backgroundColor: theme.colors['red-light'],
+  },
+} as const
+
+export const Container = styled.View<ContainerProps>`
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -8,8 +30,8 @@ export const Container = styled.View`
   padding: 20px 16px;
   border-radius: 6px;
   
-  ${({ theme }) => css`
-    background-color: ${theme.colors['green-light']};
+  ${({ status = 'success' }) => css`
+    background-color: ${variants[status].backgroundColor};
   `};
 `
 

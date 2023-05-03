@@ -50,6 +50,27 @@ export function AppContextProvider({ children }: PropsWithChildren) {
       return accumulator
     }, [])
 
+    const amount = state.reduce((accumulator, meal) => {
+      if (meal.status === 'bad') {
+        accumulator.badMeal += 1
+      }
+
+      if (meal.status === 'good') {
+        accumulator.goodMeal += 1
+      }
+
+      return accumulator
+    }, {
+      goodMeal: 0,
+      badMeal: 0,
+    })
+
+    const total = state.length
+    const percentages = {
+      goodMeal: amount.goodMeal / total * 100,
+      badMeal: amount.badMeal / total * 100,
+    }
+
     function addMeal(meal: Meal) {
       addStorageMealAsync(dispatch, meal)
 
@@ -80,6 +101,7 @@ export function AppContextProvider({ children }: PropsWithChildren) {
 
     return {
       meals,
+      percentages,
       addMeal,
       deleteMeal,
       updateMeal,

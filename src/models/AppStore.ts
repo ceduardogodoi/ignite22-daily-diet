@@ -2,6 +2,10 @@ import { Meal, MealDTO, MealSectionList } from './Meal'
 
 export type AppStore = {
   meals: MealSectionList
+  percentages: {
+    goodMeal: number
+    badMeal: number
+  }
 }
 
 export type Context = AppStore & {
