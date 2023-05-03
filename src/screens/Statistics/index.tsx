@@ -1,5 +1,9 @@
 import { FlatList, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
+import { AppNavigatorRoutesProps } from '@routes';
+
+import { BoxStatus } from '@styles/global';
 import {
   Header,
   Description,
@@ -13,8 +17,6 @@ import {
   StatusBar,
   LeftArrowButton,
 } from './styles'
-
-import type { BoxStatus } from './styles'
 
 type Data = {
   id: string,
@@ -39,12 +41,18 @@ const data: Data = [
 ];
 
 export function Statistics() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+  function handleBack() {
+    navigation.navigate('Home')
+  }
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
 
       <Header>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleBack}>
           <LeftArrowButton />
         </TouchableOpacity>
 

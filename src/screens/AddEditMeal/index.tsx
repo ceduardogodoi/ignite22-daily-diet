@@ -105,20 +105,17 @@ export function AddEditMeal() {
   }
 
   function submit(data: FormData) {
-    console.log(JSON.stringify(data, null, 2))
-    // if (editingMeal) {
-    //   const editedMeal: Meal = {
-    //     id: editingMeal.id,
-    //     ...data
-    //   }
-    //   updateMeal(editedMeal)
-    //   return
-    // }
+    if (editingMeal) {
+      const editedMeal: Meal = {
+        id: editingMeal.id,
+        ...data
+      }
+      updateMeal(editedMeal)
+      return
+    }
 
-    // addMeal(data)
+    addMeal(data)
   }
-
-  // console.log(JSON.stringify(errors, null, 2))
 
   return (
     <Container>

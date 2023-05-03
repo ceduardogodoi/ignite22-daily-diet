@@ -1,12 +1,16 @@
 import { Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { Description, Percentage, OpenIcon, Container } from './styles'
 
 import topRightArrow from '@assets/top-right-arrow.png'
+import { AppNavigatorRoutesProps } from '@routes'
 
 export function PercentBox() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>()
+
   function handleOpenIcon() {
-    console.log('open icon tapped...');
+    navigation.navigate('Statistics')
   }
 
   return (
