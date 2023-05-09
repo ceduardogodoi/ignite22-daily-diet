@@ -2,6 +2,8 @@ import { Meal, MealDTO, MealSectionList } from './Meal'
 
 export type AppStore = {
   meals: MealSectionList
+  mealAmount: number
+  bestSequenceAmount: number
   percentages: {
     goodMeal: number
     badMeal: number

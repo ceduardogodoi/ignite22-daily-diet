@@ -18,7 +18,7 @@ import {
 } from './reducers/async'
 import { resetMealsAction } from './actions'
 
-import { emptyMeals } from '../mocks'
+import { emptyMeals, meals } from '../mocks'
 
 import { AppNavigatorRoutesProps } from '@routes'
 
@@ -65,10 +65,21 @@ export function AppContextProvider({ children }: PropsWithChildren) {
       badMeal: 0,
     })
 
-    const total = state.length
+    const mealAmount = state.length
     const percentages = {
-      goodMeal: amount.goodMeal / total * 100,
-      badMeal: amount.badMeal / total * 100,
+      goodMeal: (amount.goodMeal / mealAmount * 100) || 0,
+      badMeal: (amount.badMeal / mealAmount * 100) || 0,
+    }
+
+    let count = 0
+    let bestSequenceAmount = 0
+    for (const meal of state) {
+      if (meal.status === 'good') {
+        count += 1
+        bestSequenceAmount = count > bestSequenceAmount ? count : bestSequenceAmount
+      } else {
+        count = 0
+      }
     }
 
     function addMeal(meal: Meal) {
@@ -101,6 +112,8 @@ export function AppContextProvider({ children }: PropsWithChildren) {
 
     return {
       meals,
+      mealAmount,
+      bestSequenceAmount,
       percentages,
       addMeal,
       deleteMeal,

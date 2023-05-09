@@ -2,8 +2,8 @@ import { FlatList, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import { AppNavigatorRoutesProps } from '@routes';
+import { useAppContext } from '@store/AppContextProvider';
 
-import { BoxStatus } from '@styles/global';
 import {
   Header,
   Description,
@@ -18,30 +18,13 @@ import {
   LeftArrowButton,
 } from './styles'
 
-type Data = {
-  id: string,
-  amount: number,
-  title: string,
-  status: BoxStatus,
-}[]
-
-const data: Data = [
-  {
-    id: '1',
-    amount: 99,
-    title: 'refeições dentro da dieta',
-    status: 'success',
-  },
-  {
-    id: '2',
-    amount: 10,
-    title: 'refeições dentro fora da dieta',
-    status: 'fail',
-  },
-];
-
 export function Statistics() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const { percentages, mealAmount, bestSequenceAmount } = useAppContext()
+
+  const percentage = Math.round(percentages.goodMeal)
+
+  const status = percentages.goodMeal >= percentages.badMeal ? 'success' : 'fail'
 
   function handleBack() {
     navigation.navigate('Home')
@@ -51,13 +34,13 @@ export function Statistics() {
     <Container>
       <StatusBar barStyle="dark-content" />
 
-      <Header>
+      <Header status={status}>
         <TouchableOpacity onPress={handleBack}>
-          <LeftArrowButton />
+          <LeftArrowButton status={status} />
         </TouchableOpacity>
 
         <Percentage>
-          90,86%
+          {percentage}%
         </Percentage>
         <Description>
           das refeições dentro da dieta
@@ -68,7 +51,7 @@ export function Statistics() {
         <Heading>Estatísticas gerais</Heading>
 
         <Box>
-          <BoxTitle>22</BoxTitle>
+          <BoxTitle>{bestSequenceAmount}</BoxTitle>
 
           <BoxDescription>
             melhor sequência de pratos dentro da dieta
@@ -76,15 +59,15 @@ export function Statistics() {
         </Box>
 
         <Box>
-          <BoxTitle>109</BoxTitle>
+          <BoxTitle>{mealAmount}</BoxTitle>
 
           <BoxDescription>
-            melhor sequência de pratos dentro da dieta
+            refeições registradas
           </BoxDescription>
         </Box>
 
         <FlatList
-          data={data}
+          data={[]}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <Box fullWidth={false} status={item.status}>

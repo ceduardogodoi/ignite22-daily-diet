@@ -14,6 +14,8 @@ export function PercentBox() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
   const { percentages } = useAppContext()
 
+  const percentage = Math.round(percentages.goodMeal)
+
   const status = percentages.goodMeal >= percentages.badMeal ? 'success' : 'fail'
   const arrowIcon = status === 'success' ? topRightArrowGreen : topRightArrowRed
 
@@ -23,7 +25,7 @@ export function PercentBox() {
 
   return (
     <Container status={status}>
-      <Percentage>{Math.round(percentages.goodMeal)}%</Percentage>
+      <Percentage>{percentage}%</Percentage>
 
       <Description>das refeições dentro da dieta</Description>
 
