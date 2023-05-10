@@ -65,6 +65,8 @@ export function AppContextProvider({ children }: PropsWithChildren) {
       badMeal: 0,
     })
 
+    const goodMealAmount = amount.goodMeal
+    const badMealAmount = amount.badMeal
     const mealAmount = state.length
     const percentages = {
       goodMeal: (amount.goodMeal / mealAmount * 100) || 0,
@@ -112,6 +114,8 @@ export function AppContextProvider({ children }: PropsWithChildren) {
 
     return {
       meals,
+      goodMealAmount,
+      badMealAmount,
       mealAmount,
       bestSequenceAmount,
       percentages,

@@ -20,7 +20,7 @@ import {
 
 export function Statistics() {
   const navigation = useNavigation<AppNavigatorRoutesProps>()
-  const { percentages, mealAmount, bestSequenceAmount } = useAppContext()
+  const { percentages, mealAmount, goodMealAmount, badMealAmount, bestSequenceAmount } = useAppContext()
 
   const percentage = Math.round(percentages.goodMeal)
 
@@ -67,14 +67,14 @@ export function Statistics() {
         </Box>
 
         <FlatList
-          data={[]}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <Box fullWidth={false} status={item.status}>
-              <BoxTitle>{item.amount}</BoxTitle>
+          data={[goodMealAmount, badMealAmount]}
+          keyExtractor={(_, index) => String(index)}
+          renderItem={({ item, index }) => (
+            <Box fullWidth={false} status={index === 0 ? 'success' : 'fail'}>
+              <BoxTitle>{item}</BoxTitle>
 
               <BoxDescription>
-                {item.title}
+                refeições {index === 0 ? 'dentro' : 'fora'} da dieta
               </BoxDescription>
             </Box>
           )}
